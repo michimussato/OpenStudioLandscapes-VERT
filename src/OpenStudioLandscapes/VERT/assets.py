@@ -348,12 +348,8 @@ def compose(
     }
 
     service_name = "vert"
-    container_name = "--".join(
-        [f"{service_name}", env.get("LANDSCAPE", "default")]
-    )
-    host_name = ".".join(
-        [env["HOSTNAME"], env["OPENSTUDIOLANDSCAPES__DOMAIN_LAN"]]
-    )
+    container_name = "--".join([f"{service_name}", env.get("LANDSCAPE", "default")])
+    host_name = ".".join([env["HOSTNAME"], env["OPENSTUDIOLANDSCAPES__DOMAIN_LAN"]])
 
     docker_dict_override = {
         "services": {

@@ -14,12 +14,7 @@
    6. [Variables](#variables)
       1. [Feature Configs](#feature-configs)
 2. [Community](#community)
-3. [Create new Feature from this VERT](#create-new-feature-from-this-vert)
-   1. [Create a new repository from this VERT](#create-a-new-repository-from-this-vert)
-   2. [Clone new Feature to your local drive](#clone-new-feature-to-your-local-drive)
-   3. [Replace `VERT` occurrences in `OpenStudioLandscapes-NewFeature`](#replace-vert-occurrences-in-openstudiolandscapes-newfeature)
-   4. [Commit your initial Setup](#commit-your-initial-setup)
-   5. [Enable OpenStudioLandscapes-NewFeature in the Engine](#enable-openstudiolandscapes-newfeature-in-the-engine)
+3. [Official Resources](#official-resources)
 
 ***
 
@@ -33,7 +28,7 @@ This `README.md` was dynamically created with [OpenStudioLandscapesUtil-ReadmeGe
 
 This is an extension to the OpenStudioLandscapes ecosystem. The full documentation of OpenStudioLandscapes is available [here](https://github.com/michimussato/OpenStudioLandscapes).
 
-You feel like writing your own Feature? Go and check out the [OpenStudioLandscapes-VERT](https://github.com/michimussato/OpenStudioLandscapes-VERT).
+You feel like writing your own Feature? Go and check out the [OpenStudioLandscapes-Template](https://github.com/michimussato/OpenStudioLandscapes-Template).
 
 ## Requirements
 
@@ -82,7 +77,7 @@ FEATURES.update(
         #   "enabled": get_bool_env("ENV_VAR")
         # - combined:
         #   "enabled": True|False or get_bool_env(
-        #       "OPENSTUDIOLANDSCAPES__ENABLE_FEATURE_OPENSTUDIOLANDSCAPES_TEMPLATE"
+        #       "OPENSTUDIOLANDSCAPES__ENABLE_FEATURE_OPENSTUDIOLANDSCAPES_VERT"
         #   )
         "module": "OpenStudioLandscapes.VERT.definitions",
         "compose_scope": ComposeScope.DEFAULT,
@@ -170,16 +165,21 @@ The following variables are being declared in `OpenStudioLandscapes.VERT.constan
 
 #### Feature Config: default
 
-| Variable                    | Type   | Value                                                                  |
-| :-------------------------- | :----- | :--------------------------------------------------------------------- |
-| `DOCKER_USE_CACHE`          | `bool` | `False`                                                                |
-| `HOSTNAME`                  | `str`  | `template`                                                             |
-| `TELEPORT_ENTRY_POINT_HOST` | `str`  | `{{HOSTNAME}}`                                                         |
-| `TELEPORT_ENTRY_POINT_PORT` | `str`  | `{{ENV_VAR_PORT_HOST}}`                                                |
-| `ENV_VAR_PORT_HOST`         | `str`  | `1234`                                                                 |
-| `ENV_VAR_PORT_CONTAINER`    | `str`  | `4321`                                                                 |
-| `EXTRA_FILE`                | `str`  | `{DOT_FEATURES}/OpenStudioLandscapes-VERT/.payload/bin/extra.file` |
-| `TEMPLATE_VOLUME`           | `str`  | `{DOT_LANDSCAPES}/{LANDSCAPE}/Template__Template/data`                 |
+| Variable                            | Type   | Value                                                                                                         |
+| :---------------------------------- | :----- | :------------------------------------------------------------------------------------------------------------ |
+| `DOCKER_USE_CACHE`                  | `bool` | `False`                                                                                                       |
+| `HOSTNAME`                          | `str`  | `vert`                                                                                                        |
+| `TELEPORT_ENTRY_POINT_HOST`         | `str`  | `{{HOSTNAME}}`                                                                                                |
+| `TELEPORT_ENTRY_POINT_PORT`         | `str`  | `{{VERT_PORT_HOST}}`                                                                                          |
+| `VERT_PORT_HOST`                    | `str`  | `3344`                                                                                                        |
+| `VERT_PORT_CONTAINER`               | `str`  | `80`                                                                                                          |
+| `PUB_HOSTNAME`                      | `str`  | `vert`                                                                                                        |
+| `PUB_PLAUSIBLE_URL`                 | `str`  | ``                                                                                                            |
+| `PUB_ENV`                           | `str`  | `production`                                                                                                  |
+| `PUB_DISABLE_ALL_EXTERNAL_REQUESTS` | `str`  | `false`                                                                                                       |
+| `PUB_VERTD_URL`                     | `str`  | ``                                                                                                            |
+| `PUB_DONATION_URL`                  | `str`  | ``                                                                                                            |
+| `PUB_STRIPE_KEY`                    | `str`  | `pk_live_51RDVmAGSxPVad6bQwzVNnbc28nlmzA30krLWk1fefCMpUPiSRPkavMMbGqa8A3lUaOCMlsUEVy2CWDYg0ip3aPpL00ZJlsMkf2` |
 
 # Community
 
@@ -190,8 +190,9 @@ The following variables are being declared in `OpenStudioLandscapes.VERT.constan
 | OpenStudioLandscapes-Dagster        | [https://github.com/michimussato/OpenStudioLandscapes-Dagster](https://github.com/michimussato/OpenStudioLandscapes-Dagster)               | [# openstudiolandscapes-dagster](https://discord.gg/jwB3DwmKvs)        |
 | OpenStudioLandscapes-Kitsu          | [https://github.com/michimussato/OpenStudioLandscapes-Kitsu](https://github.com/michimussato/OpenStudioLandscapes-Kitsu)                   | [# openstudiolandscapes-kitsu](https://discord.gg/6cc6mkReJ7)          |
 | OpenStudioLandscapes-RustDeskServer | [https://github.com/michimussato/OpenStudioLandscapes-RustDeskServer](https://github.com/michimussato/OpenStudioLandscapes-RustDeskServer) | [# openstudiolandscapes-rustdeskserver](https://discord.gg/nJ8Ffd2xY3) |
-| OpenStudioLandscapes-VERT       | [https://github.com/michimussato/OpenStudioLandscapes-VERT](https://github.com/michimussato/OpenStudioLandscapes-VERT)             | [# openstudiolandscapes-template](https://discord.gg/J59GYp3Wpy)       |
+| OpenStudioLandscapes-Template       | [https://github.com/michimussato/OpenStudioLandscapes-Template](https://github.com/michimussato/OpenStudioLandscapes-Template)             | [# openstudiolandscapes-template](https://discord.gg/J59GYp3Wpy)       |
 | OpenStudioLandscapes-Twingate       | [https://github.com/michimussato/OpenStudioLandscapes-Twingate](https://github.com/michimussato/OpenStudioLandscapes-Twingate)             | [# openstudiolandscapes-twingate](https://discord.gg/tREYa6UNJf)       |
+| OpenStudioLandscapes-VERT           | [https://github.com/michimussato/OpenStudioLandscapes-VERT](https://github.com/michimussato/OpenStudioLandscapes-VERT)                     | [# openstudiolandscapes-twingate](https://discord.gg/FYaFRUwbYr)       |
 
 To follow up on the previous LinkedIn publications, visit:
 
@@ -200,96 +201,11 @@ To follow up on the previous LinkedIn publications, visit:
 
 ***
 
-# Create new Feature from this VERT
+# Official Resources
 
-[![Logo OpenStudioLandscapes ](https://github.com/michimussato/OpenStudioLandscapes/raw/main/media/images/logo128.png)](https://www.url.com)
+[![Logo VERT ](https://github.com/user-attachments/assets/bf441748-0ec5-4c8a-b3e5-11301ee3f0bd)](https://vert.sh)
 
-## Create a new repository from this VERT
+Official VERT-sh information here:
 
-Click `Use this template` and select `Create a new repository`
-
-![Create a new repository ](media/images/use_template.png)
-
-And fill in information as needed by specifying the `Repository name *` of the OpenStudioLandscapes Feature (i.e. `OpenStudioLandscapes-NewFeature`):
-
-![Create a new repository ](media/images/create_repository.png)
-
-## Clone new Feature to your local drive
-
-Clone the new Feature into the `.features` directory of your local `OpenStudioLandscapes` clone:
-
-```generic
-cd /to/your/git/repos/OpenStudioLandscapes/.features
-git clone <GIT_REPOSITORY_URL>
-```
-
-## Replace `VERT` occurrences in `OpenStudioLandscapes-NewFeature`
-
-Rename the package directory from `VERT` to `NewFeature`:
-
-```generic
-NEW_FEATURE="NewFeature"
-
-cd /to/your/git/repos/OpenStudioLandscapes/.features/OpenStudioLandscapes-${NEW_FEATURE}
-mv src/OpenStudioLandscapes/VERT src/OpenStudioLandscapes/${NEW_FEATURE}
-```
-
-Rename all occurrences of `template` in your new Feature with the correct name in the following files:
-
-- update [`./pyproject.toml`](./pyproject.toml)
-- update `./src/OpenStudioLandscapes/${NEW_FEATURE}/__init__.py`
-- update `./src/OpenStudioLandscapes/${NEW_FEATURE}/assets.py`
-- update `./src/OpenStudioLandscapes/${NEW_FEATURE}/constants.py`
-- update `./src/OpenStudioLandscapes/${NEW_FEATURE}/definitions.py`
-- update `./src/OpenStudioLandscapes/${NEW_FEATURE}/readme_feature.py` [`snakemd` Documentation](https://www.snakemd.io/en/latest/)
-- remove media `rm ./media/images/*.*`
-- remove nox reports `rm ./.nox/*.*`
-- remove sbom reports `rm ./.sbom/*.*`
-
-## Commit your initial Setup
-
-Commit all changes to Git:
-
-```generic
-git add *
-git commit -m "Initial Setup"
-git push
-```
-
-## Enable OpenStudioLandscapes-NewFeature in the Engine
-
-Commit all changes to Git:
-
-```generic
-cd /to/your/git/repos/OpenStudioLandscapes
-source .venv/bin/activate
-pip install --editable .features/OpenStudioLandscapes-${NEW_FEATURE}[dev]
-pip install --editable .[dev]
-```
-
-Edit the `OpenStudioLandscapes.engine` to use your new Feature:
-
-- update `OpenStudioLandscapes/.env`
-- update `OpenStudioLandscapes/src/OpenStudioLandscapes/engine/features.py`
-- update `OpenStudioLandscapes/README.md#current-feature-statuses`
-
-Known Issues:
-
-```shell
-$ /home/michael/git/repos/OpenStudioLandscapes/.landscapes/2025-10-20-12-51-39-68351d36801042cb943f1675e611e3c0/ComposeScope_default__ComposeScope_default/ComposeScope_default__DOCKER_COMPOSE/docker_compose/docker_compose_up.sh
-~/git/repos/OpenStudioLandscapes/.landscapes/2025-10-20-12-51-39-68351d36801042cb943f1675e611e3c0/ComposeScope_default__ComposeScope_default/ComposeScope_default__DOCKER_COMPOSE/docker_compose ~
-Working Directory: /home/michael/git/repos/OpenStudioLandscapes/.landscapes/2025-10-20-12-51-39-68351d36801042cb943f1675e611e3c0/ComposeScope_default__ComposeScope_default/ComposeScope_default__DOCKER_COMPOSE/docker_compose
-Sourcing ../../../../2025-10-20-12-51-39-68351d36801042cb943f1675e611e3c0/.overrides file...
-Sourced successfully.
- Container hbbs--2025-10-20-12-51-39-68351d36801042cb943f1675e611e3c0  Creating
- Container dagster--2025-10-20-12-51-39-68351d36801042cb943f1675e611e3c0  Creating
- Container template--2025-10-20-12-51-39-68351d36801042cb943f1675e611e3c0  Creating
- Container mongo-express-10-2--2025-10-20-12-51-39-68351d36801042cb943f1675e611e3c0  Creating
- Container repository-installer-10-2--2025-10-20-12-51-39-68351d36801042cb943f1675e611e3c0  Creating
- Container ayon-server--2025-10-20-12-51-39-68351d36801042cb943f1675e611e3c0  Creating
- Container opencue-flyway--2025-10-20-12-51-39-68351d36801042cb943f1675e611e3c0  Creating
- Container kitsu--2025-10-20-12-51-39-68351d36801042cb943f1675e611e3c0  Creating
- Container template--2025-10-20-12-51-39-68351d36801042cb943f1675e611e3c0  Error response from daemon: no command specified
-Error response from daemon: no command specified
-~
-```
+- [Official Website](https://vert.sh/)
+- [GitHub](https://github.com/VERT-sh/VERT)]
