@@ -42,37 +42,17 @@ FEATURE_CONFIGS = {
     OpenStudioLandscapesConfig.DEFAULT: {
         "DOCKER_USE_CACHE": DOCKER_USE_CACHE,
         "HOSTNAME": "vert",
-        # "TELEPORT_ENTRY_POINT_HOST": "{{HOSTNAME}}",  # Either a hardcoded str or a ref to a Variable (with double {{ }}!)
-        # "TELEPORT_ENTRY_POINT_PORT": "{{ENV_VAR_PORT_HOST}}",  # Either a hardcoded str or a ref to a Variable (with double {{ }}!)
-        # "ENV_VAR_PORT_HOST": "1234",
-        # "ENV_VAR_PORT_CONTAINER": "4321",
-        # f"EXTRA_FILE": pathlib.Path(
-        #     "{DOT_FEATURES}",
-        #     FEATURE,
-        #     ".payload",
-        #     "bin",
-        #     "extra.file",
-        # )
-        # .expanduser()
-        # .as_posix(),
-        # "TEMPLATE_VOLUME": {
-        #     #################################################################
-        #     # Inside Landscape:
-        #     FeatureVolumeType.CONTAINED: pathlib.Path(
-        #         "{DOT_LANDSCAPES}",
-        #         "{LANDSCAPE}",
-        #         f"{ASSET_HEADER['group_name']}__{'__'.join(ASSET_HEADER['key_prefix'])}",
-        #         "data",
-        #     ).as_posix(),
-        #     #################################################################
-        #     # Shared:
-        #     FeatureVolumeType.SHARED: pathlib.Path(
-        #         "{DOT_LANDSCAPES}",
-        #         "{DOT_SHARED_VOLUMES}",
-        #         f"{ASSET_HEADER['group_name']}__{'__'.join(ASSET_HEADER['key_prefix'])}",
-        #         "data",
-        #     ).as_posix(),
-        # }[FeatureVolumeType.CONTAINED],
+        "TELEPORT_ENTRY_POINT_HOST": "{{HOSTNAME}}",  # Either a hardcoded str or a ref to a Variable (with double {{ }}!)
+        "TELEPORT_ENTRY_POINT_PORT": "{{VERT_PORT_HOST}}",  # Either a hardcoded str or a ref to a Variable (with double {{ }}!)
+        "VERT_PORT_HOST": "3344",
+        "VERT_PORT_CONTAINER": "80",
+        "PUB_HOSTNAME": "vert",
+        "PUB_PLAUSIBLE_URL": "",
+        "PUB_ENV": "production",
+        "PUB_DISABLE_ALL_EXTERNAL_REQUESTS": "false",
+        "PUB_VERTD_URL": "",
+        "PUB_DONATION_URL": "",
+        "PUB_STRIPE_KEY": "pk_live_51RDVmAGSxPVad6bQwzVNnbc28nlmzA30krLWk1fefCMpUPiSRPkavMMbGqa8A3lUaOCMlsUEVy2CWDYg0ip3aPpL00ZJlsMkf2",
     }
 }
 # @formatter:on
