@@ -165,21 +165,14 @@ The following variables are being declared in `OpenStudioLandscapes.VERT.constan
 
 #### Feature Config: default
 
-| Variable                            | Type   | Value                                                                                                         |
-| :---------------------------------- | :----- | :------------------------------------------------------------------------------------------------------------ |
-| `DOCKER_USE_CACHE`                  | `bool` | `False`                                                                                                       |
-| `HOSTNAME`                          | `str`  | `vert`                                                                                                        |
-| `TELEPORT_ENTRY_POINT_HOST`         | `str`  | `{{HOSTNAME}}`                                                                                                |
-| `TELEPORT_ENTRY_POINT_PORT`         | `str`  | `{{VERT_PORT_HOST}}`                                                                                          |
-| `VERT_PORT_HOST`                    | `str`  | `3344`                                                                                                        |
-| `VERT_PORT_CONTAINER`               | `str`  | `80`                                                                                                          |
-| `PUB_HOSTNAME`                      | `str`  | `vert`                                                                                                        |
-| `PUB_PLAUSIBLE_URL`                 | `str`  | ``                                                                                                            |
-| `PUB_ENV`                           | `str`  | `production`                                                                                                  |
-| `PUB_DISABLE_ALL_EXTERNAL_REQUESTS` | `str`  | `false`                                                                                                       |
-| `PUB_VERTD_URL`                     | `str`  | ``                                                                                                            |
-| `PUB_DONATION_URL`                  | `str`  | ``                                                                                                            |
-| `PUB_STRIPE_KEY`                    | `str`  | `pk_live_51RDVmAGSxPVad6bQwzVNnbc28nlmzA30krLWk1fefCMpUPiSRPkavMMbGqa8A3lUaOCMlsUEVy2CWDYg0ip3aPpL00ZJlsMkf2` |
+| Variable                    | Type   | Value                |
+| :-------------------------- | :----- | :------------------- |
+| `DOCKER_USE_CACHE`          | `bool` | `False`              |
+| `HOSTNAME`                  | `str`  | `vert`               |
+| `TELEPORT_ENTRY_POINT_HOST` | `str`  | `{{HOSTNAME}}`       |
+| `TELEPORT_ENTRY_POINT_PORT` | `str`  | `{{VERT_PORT_HOST}}` |
+| `VERT_PORT_HOST`            | `str`  | `3344`               |
+| `VERT_PORT_CONTAINER`       | `str`  | `80`                 |
 
 # Community
 

@@ -46,13 +46,6 @@ FEATURE_CONFIGS = {
         "TELEPORT_ENTRY_POINT_PORT": "{{VERT_PORT_HOST}}",  # Either a hardcoded str or a ref to a Variable (with double {{ }}!)
         "VERT_PORT_HOST": "3344",
         "VERT_PORT_CONTAINER": "80",
-        "PUB_HOSTNAME": "vert",
-        "PUB_PLAUSIBLE_URL": "",
-        "PUB_ENV": "production",
-        "PUB_DISABLE_ALL_EXTERNAL_REQUESTS": "false",
-        "PUB_VERTD_URL": "",
-        "PUB_DONATION_URL": "",
-        "PUB_STRIPE_KEY": "pk_live_51RDVmAGSxPVad6bQwzVNnbc28nlmzA30krLWk1fefCMpUPiSRPkavMMbGqa8A3lUaOCMlsUEVy2CWDYg0ip3aPpL00ZJlsMkf2",
     }
 }
 # @formatter:on
