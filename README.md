@@ -2,7 +2,7 @@
 
 ***
 
-1. [Feature: OpenStudioLandscapes-Template](#feature-openstudiolandscapes-template)
+1. [Feature: OpenStudioLandscapes-VERT](#feature-openstudiolandscapes-vert)
    1. [Brief](#brief)
    2. [Requirements](#requirements)
    3. [Install](#install)
@@ -14,10 +14,10 @@
    6. [Variables](#variables)
       1. [Feature Configs](#feature-configs)
 2. [Community](#community)
-3. [Create new Feature from this Template](#create-new-feature-from-this-template)
-   1. [Create a new repository from this Template](#create-a-new-repository-from-this-template)
+3. [Create new Feature from this VERT](#create-new-feature-from-this-vert)
+   1. [Create a new repository from this VERT](#create-a-new-repository-from-this-vert)
    2. [Clone new Feature to your local drive](#clone-new-feature-to-your-local-drive)
-   3. [Replace `Template` occurrences in `OpenStudioLandscapes-NewFeature`](#replace-template-occurrences-in-openstudiolandscapes-newfeature)
+   3. [Replace `VERT` occurrences in `OpenStudioLandscapes-NewFeature`](#replace-vert-occurrences-in-openstudiolandscapes-newfeature)
    4. [Commit your initial Setup](#commit-your-initial-setup)
    5. [Enable OpenStudioLandscapes-NewFeature in the Engine](#enable-openstudiolandscapes-newfeature-in-the-engine)
 
@@ -27,13 +27,13 @@ This `README.md` was dynamically created with [OpenStudioLandscapesUtil-ReadmeGe
 
 ***
 
-# Feature: OpenStudioLandscapes-Template
+# Feature: OpenStudioLandscapes-VERT
 
 ## Brief
 
 This is an extension to the OpenStudioLandscapes ecosystem. The full documentation of OpenStudioLandscapes is available [here](https://github.com/michimussato/OpenStudioLandscapes).
 
-You feel like writing your own Feature? Go and check out the [OpenStudioLandscapes-Template](https://github.com/michimussato/OpenStudioLandscapes-Template).
+You feel like writing your own Feature? Go and check out the [OpenStudioLandscapes-VERT](https://github.com/michimussato/OpenStudioLandscapes-VERT).
 
 ## Requirements
 
@@ -48,13 +48,13 @@ Clone this repository into `OpenStudioLandscapes/.features`:
 
 ```shell
 # cd .features
-git clone https://github.com/michimussato/OpenStudioLandscapes-Template.git
+git clone https://github.com/michimussato/OpenStudioLandscapes-VERT.git
 ```
 
 Create `venv`:
 
 ```shell
-# cd .features/OpenStudioLandscapes-Template
+# cd .features/OpenStudioLandscapes-VERT
 python3.11 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip setuptools
@@ -63,7 +63,7 @@ python -m pip install --upgrade pip setuptools
 Configure `venv`:
 
 ```shell
-# cd .features/OpenStudioLandscapes-Template
+# cd .features/OpenStudioLandscapes-VERT
 pip install -e "../../[dev]"
 pip install -e ".[dev]"
 ```
@@ -76,7 +76,7 @@ Add the following code to `OpenStudioLandscapes.engine.features.FEATURES`:
 
 ```python
 FEATURES.update(
-    "OpenStudioLandscapes-Template": {
+    "OpenStudioLandscapes-VERT": {
         "enabled": True|False,
         # - from ENVIRONMENT VARIABLE (.env):
         #   "enabled": get_bool_env("ENV_VAR")
@@ -84,7 +84,7 @@ FEATURES.update(
         #   "enabled": True|False or get_bool_env(
         #       "OPENSTUDIOLANDSCAPES__ENABLE_FEATURE_OPENSTUDIOLANDSCAPES_TEMPLATE"
         #   )
-        "module": "OpenStudioLandscapes.Template.definitions",
+        "module": "OpenStudioLandscapes.VERT.definitions",
         "compose_scope": ComposeScope.DEFAULT,
         "feature_config": OpenStudioLandscapesConfig.DEFAULT,
     }
@@ -146,7 +146,7 @@ We create the following SBOMs:
 - [`pipdeptree`](https://pypi.org/project/pipdeptree/) (Dot)
 - [`pipdeptree`](https://pypi.org/project/pipdeptree/) (Mermaid)
 
-SBOMs for the different Python interpreters defined in [`.noxfile.VERSIONS`](https://github.com/michimussato/OpenStudioLandscapes-Template/tree/main/noxfile.py) will be created in the [`.sbom`](https://github.com/michimussato/OpenStudioLandscapes-Template/tree/main/.sbom) directory of this repository.
+SBOMs for the different Python interpreters defined in [`.noxfile.VERSIONS`](https://github.com/michimussato/OpenStudioLandscapes-VERT/tree/main/noxfile.py) will be created in the [`.sbom`](https://github.com/michimussato/OpenStudioLandscapes-VERT/tree/main/.sbom) directory of this repository.
 
 - `cyclone-dx`
 - `pipdeptree` (Dot)
@@ -158,7 +158,7 @@ Currently, the following Python interpreters are enabled for testing:
 
 ## Variables
 
-The following variables are being declared in `OpenStudioLandscapes.Template.constants` and are accessible throughout the [`OpenStudioLandscapes-Template`](https://github.com/michimussato/OpenStudioLandscapes-Template/tree/main/src/OpenStudioLandscapes/Template/constants.py) package.
+The following variables are being declared in `OpenStudioLandscapes.VERT.constants` and are accessible throughout the [`OpenStudioLandscapes-VERT`](https://github.com/michimussato/OpenStudioLandscapes-VERT/tree/main/src/OpenStudioLandscapes/VERT/constants.py) package.
 
 | Variable           | Type   |
 | :----------------- | :----- |
@@ -178,7 +178,7 @@ The following variables are being declared in `OpenStudioLandscapes.Template.con
 | `TELEPORT_ENTRY_POINT_PORT` | `str`  | `{{ENV_VAR_PORT_HOST}}`                                                |
 | `ENV_VAR_PORT_HOST`         | `str`  | `1234`                                                                 |
 | `ENV_VAR_PORT_CONTAINER`    | `str`  | `4321`                                                                 |
-| `EXTRA_FILE`                | `str`  | `{DOT_FEATURES}/OpenStudioLandscapes-Template/.payload/bin/extra.file` |
+| `EXTRA_FILE`                | `str`  | `{DOT_FEATURES}/OpenStudioLandscapes-VERT/.payload/bin/extra.file` |
 | `TEMPLATE_VOLUME`           | `str`  | `{DOT_LANDSCAPES}/{LANDSCAPE}/Template__Template/data`                 |
 
 # Community
@@ -190,7 +190,7 @@ The following variables are being declared in `OpenStudioLandscapes.Template.con
 | OpenStudioLandscapes-Dagster        | [https://github.com/michimussato/OpenStudioLandscapes-Dagster](https://github.com/michimussato/OpenStudioLandscapes-Dagster)               | [# openstudiolandscapes-dagster](https://discord.gg/jwB3DwmKvs)        |
 | OpenStudioLandscapes-Kitsu          | [https://github.com/michimussato/OpenStudioLandscapes-Kitsu](https://github.com/michimussato/OpenStudioLandscapes-Kitsu)                   | [# openstudiolandscapes-kitsu](https://discord.gg/6cc6mkReJ7)          |
 | OpenStudioLandscapes-RustDeskServer | [https://github.com/michimussato/OpenStudioLandscapes-RustDeskServer](https://github.com/michimussato/OpenStudioLandscapes-RustDeskServer) | [# openstudiolandscapes-rustdeskserver](https://discord.gg/nJ8Ffd2xY3) |
-| OpenStudioLandscapes-Template       | [https://github.com/michimussato/OpenStudioLandscapes-Template](https://github.com/michimussato/OpenStudioLandscapes-Template)             | [# openstudiolandscapes-template](https://discord.gg/J59GYp3Wpy)       |
+| OpenStudioLandscapes-VERT       | [https://github.com/michimussato/OpenStudioLandscapes-VERT](https://github.com/michimussato/OpenStudioLandscapes-VERT)             | [# openstudiolandscapes-template](https://discord.gg/J59GYp3Wpy)       |
 | OpenStudioLandscapes-Twingate       | [https://github.com/michimussato/OpenStudioLandscapes-Twingate](https://github.com/michimussato/OpenStudioLandscapes-Twingate)             | [# openstudiolandscapes-twingate](https://discord.gg/tREYa6UNJf)       |
 
 To follow up on the previous LinkedIn publications, visit:
@@ -200,11 +200,11 @@ To follow up on the previous LinkedIn publications, visit:
 
 ***
 
-# Create new Feature from this Template
+# Create new Feature from this VERT
 
 [![Logo OpenStudioLandscapes ](https://github.com/michimussato/OpenStudioLandscapes/raw/main/media/images/logo128.png)](https://www.url.com)
 
-## Create a new repository from this Template
+## Create a new repository from this VERT
 
 Click `Use this template` and select `Create a new repository`
 
@@ -223,15 +223,15 @@ cd /to/your/git/repos/OpenStudioLandscapes/.features
 git clone <GIT_REPOSITORY_URL>
 ```
 
-## Replace `Template` occurrences in `OpenStudioLandscapes-NewFeature`
+## Replace `VERT` occurrences in `OpenStudioLandscapes-NewFeature`
 
-Rename the package directory from `Template` to `NewFeature`:
+Rename the package directory from `VERT` to `NewFeature`:
 
 ```generic
 NEW_FEATURE="NewFeature"
 
 cd /to/your/git/repos/OpenStudioLandscapes/.features/OpenStudioLandscapes-${NEW_FEATURE}
-mv src/OpenStudioLandscapes/Template src/OpenStudioLandscapes/${NEW_FEATURE}
+mv src/OpenStudioLandscapes/VERT src/OpenStudioLandscapes/${NEW_FEATURE}
 ```
 
 Rename all occurrences of `template` in your new Feature with the correct name in the following files:

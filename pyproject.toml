@@ -11,8 +11,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "OpenStudioLandscapes-Template"
-description = "Template Feature for OpenStudioLandscapes"
+name = "OpenStudioLandscapes-VERT"
+description = "VERT Feature for OpenStudioLandscapes"
 authors = [{name = "Michael Mussato", email = "michimussato@gmail.com"}]
 maintainers = [{name = "Michael Mussato", email = "michimussato@gmail.com"}]
 license-files = ["LICENSE.txt"]
@@ -30,7 +30,7 @@ dependencies = [
     "snakemd",
     # yaml_tags.overrides:
     "docker-compose-graph @ git+https://github.com/michimussato/docker-compose-graph.git@v1.0.0",
-    "OpenStudioLandscapes @ git+https://github.com/michimussato/OpenStudioLandscapes@v1.6.0",
+    "OpenStudioLandscapes @ git+https://github.com/michimussato/OpenStudioLandscapes@v1.7.0-rc1",
 ]
 dynamic = ["version"]
 
@@ -42,11 +42,11 @@ content-type = "text/markdown; charset=UTF-8"
 # https://pypi.org/classifiers/
 
 [project.urls]
-Homepage = "https://github.com/michimussato/OpenStudioLandscapes-Template"
+Homepage = "https://github.com/michimussato/OpenStudioLandscapes-VERT"
 
 [project.optional-dependencies]
 # Add here additional requirements for extra features, to install with:
-# `pip install OpenStudioLandscapes-Template[PDF]` like:
+# `pip install OpenStudioLandscapes-VERT[PDF]` like:
 # PDF = ReportLab; RXP
 # Add here test requirements (semicolon/line-separated)
 testing = [
@@ -59,7 +59,7 @@ graphviz = [
     "pipdeptree",
 ]
 sbom = [
-    "OpenStudioLandscapes-Template[graphviz]",
+    "OpenStudioLandscapes-VERT[graphviz]",
     "cyclonedx-bom",
 ]
 lint = [
@@ -73,29 +73,29 @@ coverage = [
     "pytest",
 ]
 nox = [
-    "OpenStudioLandscapes-Template[testing]",
+    "OpenStudioLandscapes-VERT[testing]",
     "nox",
 ]
 readme = [
-    "OpenStudioLandscapesUtil-ReadmeGenerator @ git+https://github.com/michimussato/OpenStudioLandscapesUtil-ReadmeGenerator.git@v1.6.0"
+    "OpenStudioLandscapesUtil-ReadmeGenerator @ git+https://github.com/michimussato/OpenStudioLandscapesUtil-ReadmeGenerator.git@v1.7.0-rc1"
 ]
 dev = [
-    "OpenStudioLandscapes-Template[testing]",
-    "OpenStudioLandscapes-Template[lint]",
-    "OpenStudioLandscapes-Template[nox]",
-    "OpenStudioLandscapes-Template[sbom]",
-    "OpenStudioLandscapes-Template[coverage]",
-    "OpenStudioLandscapes-Template[readme]",
+    "OpenStudioLandscapes-VERT[testing]",
+    "OpenStudioLandscapes-VERT[lint]",
+    "OpenStudioLandscapes-VERT[nox]",
+    "OpenStudioLandscapes-VERT[sbom]",
+    "OpenStudioLandscapes-VERT[coverage]",
+    "OpenStudioLandscapes-VERT[readme]",
     "dagster-webserver==1.9.11",
 ]
 
 [project.entry-points]
 # Add here console scripts like:
 # console_scripts =
-# script_name = OpenStudioLandscapes.Template.module:function
+# script_name = OpenStudioLandscapes.VERT.module:function
 # For example:
 # console_scripts =
-# fibonacci = OpenStudioLandscapes.Template.skeleton:run
+# fibonacci = OpenStudioLandscapes.VERT.skeleton:run
 # And any other entry points, for example:
 # pyscaffold.cli =
 # awesome = pyscaffoldext.awesome.extension:AwesomeExtension
@@ -129,7 +129,7 @@ platforms = ["Linux"]
 # long as the structure of all Features
 # stay consistent
 packages = [
-    "OpenStudioLandscapes.Template"
+    "OpenStudioLandscapes.VERT"
 ]
 
 # [tool.pytest.ini_options]
@@ -139,7 +139,7 @@ packages = [
 # # CAUTION: --cov flags may prohibit setting breakpoints while debugging.
 # # Comment those flags to avoid this pytest issue.
 # addopts = """
-# --cov OpenStudioLandscapes.Template --cov-report term-missing
+# --cov OpenStudioLandscapes.VERT --cov-report term-missing
 # --verbose"""
 # norecursedirs = [
 #     "dist",
@@ -153,8 +153,8 @@ packages = [
 # # system: mark end-to-end system tests
 
 # [tool.setuptools_scm]
-# version_file = "src/OpenStudioLandscapes/Template/_version.py"
+# version_file = "src/OpenStudioLandscapes/VERT/_version.py"
 
 [tool.dagster]
-module_name = "OpenStudioLandscapes.Template.definitions"
-code_location_name = "OpenStudioLandscapes-Template"
+module_name = "OpenStudioLandscapes.VERT.definitions"
+code_location_name = "OpenStudioLandscapes-VERT"

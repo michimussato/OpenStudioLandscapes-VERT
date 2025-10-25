@@ -28,7 +28,7 @@ from OpenStudioLandscapes.engine.enums import (
 DOCKER_USE_CACHE = DOCKER_USE_CACHE_GLOBAL or False
 
 
-GROUP = "Template"
+GROUP = "VERT"
 KEY = [GROUP]
 FEATURE = f"OpenStudioLandscapes-{GROUP}".replace("_", "-")
 
@@ -41,38 +41,38 @@ ASSET_HEADER = {
 FEATURE_CONFIGS = {
     OpenStudioLandscapesConfig.DEFAULT: {
         "DOCKER_USE_CACHE": DOCKER_USE_CACHE,
-        "HOSTNAME": "template",
-        "TELEPORT_ENTRY_POINT_HOST": "{{HOSTNAME}}",  # Either a hardcoded str or a ref to a Variable (with double {{ }}!)
-        "TELEPORT_ENTRY_POINT_PORT": "{{ENV_VAR_PORT_HOST}}",  # Either a hardcoded str or a ref to a Variable (with double {{ }}!)
-        "ENV_VAR_PORT_HOST": "1234",
-        "ENV_VAR_PORT_CONTAINER": "4321",
-        f"EXTRA_FILE": pathlib.Path(
-            "{DOT_FEATURES}",
-            FEATURE,
-            ".payload",
-            "bin",
-            "extra.file",
-        )
-        .expanduser()
-        .as_posix(),
-        "TEMPLATE_VOLUME": {
-            #################################################################
-            # Inside Landscape:
-            FeatureVolumeType.CONTAINED: pathlib.Path(
-                "{DOT_LANDSCAPES}",
-                "{LANDSCAPE}",
-                f"{ASSET_HEADER['group_name']}__{'__'.join(ASSET_HEADER['key_prefix'])}",
-                "data",
-            ).as_posix(),
-            #################################################################
-            # Shared:
-            FeatureVolumeType.SHARED: pathlib.Path(
-                "{DOT_LANDSCAPES}",
-                "{DOT_SHARED_VOLUMES}",
-                f"{ASSET_HEADER['group_name']}__{'__'.join(ASSET_HEADER['key_prefix'])}",
-                "data",
-            ).as_posix(),
-        }[FeatureVolumeType.CONTAINED],
+        "HOSTNAME": "vert",
+        # "TELEPORT_ENTRY_POINT_HOST": "{{HOSTNAME}}",  # Either a hardcoded str or a ref to a Variable (with double {{ }}!)
+        # "TELEPORT_ENTRY_POINT_PORT": "{{ENV_VAR_PORT_HOST}}",  # Either a hardcoded str or a ref to a Variable (with double {{ }}!)
+        # "ENV_VAR_PORT_HOST": "1234",
+        # "ENV_VAR_PORT_CONTAINER": "4321",
+        # f"EXTRA_FILE": pathlib.Path(
+        #     "{DOT_FEATURES}",
+        #     FEATURE,
+        #     ".payload",
+        #     "bin",
+        #     "extra.file",
+        # )
+        # .expanduser()
+        # .as_posix(),
+        # "TEMPLATE_VOLUME": {
+        #     #################################################################
+        #     # Inside Landscape:
+        #     FeatureVolumeType.CONTAINED: pathlib.Path(
+        #         "{DOT_LANDSCAPES}",
+        #         "{LANDSCAPE}",
+        #         f"{ASSET_HEADER['group_name']}__{'__'.join(ASSET_HEADER['key_prefix'])}",
+        #         "data",
+        #     ).as_posix(),
+        #     #################################################################
+        #     # Shared:
+        #     FeatureVolumeType.SHARED: pathlib.Path(
+        #         "{DOT_LANDSCAPES}",
+        #         "{DOT_SHARED_VOLUMES}",
+        #         f"{ASSET_HEADER['group_name']}__{'__'.join(ASSET_HEADER['key_prefix'])}",
+        #         "data",
+        #     ).as_posix(),
+        # }[FeatureVolumeType.CONTAINED],
     }
 }
 # @formatter:on
