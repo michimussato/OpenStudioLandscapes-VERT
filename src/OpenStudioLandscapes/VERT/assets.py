@@ -301,9 +301,7 @@ def compose(
     )
 
     volumes_dict = {
-        "volumes": [
-            # f"{ayon_db_dir_host.as_posix()}:/var/lib/postgresql/data:rw",
-        ]
+        "volumes": []
     }
 
     # For portability, convert absolute volume paths to relative paths
@@ -436,6 +434,5 @@ def compose(
                 f"```yaml\n{docker_yaml_override}\n```"
             ),
             "path_docker_yaml_override": MetadataValue.path(docker_compose_override),
-            # Todo: "cmd_docker_run": MetadataValue.path(cmd_list_to_str(cmd_docker_run)),
         },
     )
