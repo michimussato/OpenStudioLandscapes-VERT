@@ -29,9 +29,16 @@ def readme_feature(doc: snakemd.Document) -> snakemd.Document:
     doc.add_paragraph(
         text=textwrap.dedent(
             """\
-            Official VERT-sh information.\
+            Official VERT-sh information here:\
             """
         )
+    )
+
+    doc.add_unordered_list(
+        [
+            "[Official Website](https://vert.sh/)",
+            "[GitHub](https://github.com/VERT-sh/VERT)]",
+        ]
     )
 
     # doc.add_horizontal_rule()
