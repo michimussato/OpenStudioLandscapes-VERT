@@ -1,0 +1,31 @@
+[project]
+name = "OpenStudioLandscapes-VERT"
+description = "VERT Feature for OpenStudioLandscapes"
+
+[project.urls]
+Homepage = "https://github.com/michimussato/OpenStudioLandscapes-VERT"
+
+[project.optional-dependencies]
+sbom = [
+    "OpenStudioLandscapes-VERT[graphviz]",
+]
+nox = [
+    "OpenStudioLandscapes-VERT[testing]",
+]
+dev = [
+    "OpenStudioLandscapes-VERT[testing]",
+    "OpenStudioLandscapes-VERT[lint]",
+    "OpenStudioLandscapes-VERT[nox]",
+    "OpenStudioLandscapes-VERT[sbom]",
+    "OpenStudioLandscapes-VERT[coverage]",
+    "OpenStudioLandscapes-VERT[readme]",
+]
+
+[tool.setuptools]
+packages = [
+    "OpenStudioLandscapes.VERT"
+]
+
+[tool.dagster]
+module_name = "OpenStudioLandscapes.VERT.definitions"
+code_location_name = "OpenStudioLandscapes-VERT"
