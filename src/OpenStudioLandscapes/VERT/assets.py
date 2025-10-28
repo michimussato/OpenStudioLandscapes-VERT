@@ -300,9 +300,7 @@ def compose(
         pathlib.Path(clone_repository["repository_dir_full"]) / "docker-compose.yml"
     )
 
-    volumes_dict = {
-        "volumes": []
-    }
+    volumes_dict = {"volumes": []}
 
     # For portability, convert absolute volume paths to relative paths
 

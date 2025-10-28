@@ -1,8 +1,7 @@
 ************* Module OpenStudioLandscapes.VERT.assets
-src/OpenStudioLandscapes/VERT/assets.py:322:0: C0301: Line too long (116/100) (line-too-long)
+src/OpenStudioLandscapes/VERT/assets.py:318:0: C0301: Line too long (116/100) (line-too-long)
 src/OpenStudioLandscapes/VERT/assets.py:247:1: W0511: Todo: (fixme)
-src/OpenStudioLandscapes/VERT/assets.py:399:5: W0511: Todo: (fixme)
-src/OpenStudioLandscapes/VERT/assets.py:439:13: W0511: Todo: "cmd_docker_run": MetadataValue.path(cmd_list_to_str(cmd_docker_run)), (fixme)
+src/OpenStudioLandscapes/VERT/assets.py:395:5: W0511: Todo: (fixme)
 src/OpenStudioLandscapes/VERT/assets.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 src/OpenStudioLandscapes/VERT/assets.py:19:0: W0401: Wildcard import docker_compose_graph.utils (wildcard-import)
 src/OpenStudioLandscapes/VERT/assets.py:20:0: W0401: Wildcard import docker_compose_graph.yaml_tags.overrides (wildcard-import)
@@ -20,8 +19,9 @@ src/OpenStudioLandscapes/VERT/assets.py:206:4: W0621: Redefining name 'repositor
 src/OpenStudioLandscapes/VERT/assets.py:232:28: C0209: Formatting a regular string which could be an f-string (consider-using-f-string)
 src/OpenStudioLandscapes/VERT/assets.py:263:0: C0112: Empty function docstring (empty-docstring)
 src/OpenStudioLandscapes/VERT/assets.py:263:0: R0914: Too many local variables (29/15) (too-many-locals)
-src/OpenStudioLandscapes/VERT/assets.py:383:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
-src/OpenStudioLandscapes/VERT/assets.py:393:4: C0103: Variable name "DOCKER_COMPOSE" doesn't conform to snake_case naming style (invalid-name)
+src/OpenStudioLandscapes/VERT/assets.py:379:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+src/OpenStudioLandscapes/VERT/assets.py:389:4: C0103: Variable name "DOCKER_COMPOSE" doesn't conform to snake_case naming style (invalid-name)
+src/OpenStudioLandscapes/VERT/assets.py:19:0: W0614: Unused import(s) deep_sorted from wildcard import of docker_compose_graph.utils (unused-wildcard-import)
 src/OpenStudioLandscapes/VERT/assets.py:20:0: W0614: Unused import(s) YAMLObject from wildcard import of docker_compose_graph.yaml_tags.overrides (unused-wildcard-import)
 src/OpenStudioLandscapes/VERT/assets.py:34:0: W0614: Unused import(s) docker_config, DOCKER_PROGRESS, DOCKER_CONFIG, DOCKER_USE_CACHE_GLOBAL, DOCKER_USE_CACHE_BASE, PREFIX_COMPOSE_SCOPE, GROUP_COMPOSE, KEY_COMPOSE, ASSET_HEADER_COMPOSE, ENVIRONMENT_COMPOSE, GROUP_COMPOSE_LICENSE_SERVER, KEY_COMPOSE_LICENSE_SERVER, ASSET_HEADER_COMPOSE_LICENSE_SERVER, ENVIRONMENT_COMPOSE_LICENSE_SERVER, GROUP_COMPOSE_WORKER, KEY_COMPOSE_WORKER, ASSET_HEADER_COMPOSE_WORKER, ENVIRONMENT_COMPOSE_WORKER, GROUP_BASE_ENV, KEY_BASE_ENV, ASSET_HEADER_BASE_ENV, GROUP_BASE, KEY_BASE, GROUP_LANDSCAPE_MAP, KEY_LANDSCAPE_MAP, ASSET_HEADER_LANDSCAPE_MAP, GROUP_TELEPORT, KEY_TELEPORT, ASSET_HEADER_TELEPORT, GROUP_DISTRIBUTABLE, KEY_DISTRIBUTABLE, ASSET_HEADER_DISTRIBUTABLE, constants_base, features, enum, OpenStudioLandscapesConfig, FeatureVolumeType, ComposeScope, ComposeCmdExclusion, DockerRegistry, DockerRepositoryType, DockerConfig, EnvVar, FEATURES, constants_compose, constants_compose_license_server and constants_compose_worker from wildcard import of OpenStudioLandscapes.engine.constants (unused-wildcard-import)
 src/OpenStudioLandscapes/VERT/assets.py:36:0: W0614: Unused import(s) operator_, os, shlex, LOGGER, cmd_list_to_str, get_pip_install_str, get_apt_install_str, get_copy_str, get_wget_str, get_git_root, get_configs_root, get_data_root, get_bin_root, get_image_name, parse_docker_image_path, get_compose_scope, get_feature_config, expand_dict_vars, serialize_dict, metadatavalues_from_dict, get_bool_env, get_str_env, get_dynamic_ins, Union, OpExecutionContext, get_dagster_logger, ComposeScopeException and OpenStudioLandscapesException from wildcard import of OpenStudioLandscapes.engine.utils (unused-wildcard-import)
@@ -35,12 +35,11 @@ src/OpenStudioLandscapes/VERT/readme_feature.py:18:8: C2801: Unnecessarily calls
 ************* Module OpenStudioLandscapes.VERT.constants
 src/OpenStudioLandscapes/VERT/constants.py:45:0: C0301: Line too long (122/100) (line-too-long)
 src/OpenStudioLandscapes/VERT/constants.py:46:0: C0301: Line too long (128/100) (line-too-long)
-src/OpenStudioLandscapes/VERT/constants.py:55:0: C0301: Line too long (136/100) (line-too-long)
-src/OpenStudioLandscapes/VERT/constants.py:61:1: W0511: Todo: (fixme)
+src/OpenStudioLandscapes/VERT/constants.py:54:1: W0511: Todo: (fixme)
 src/OpenStudioLandscapes/VERT/constants.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 src/OpenStudioLandscapes/VERT/constants.py:22:0: C0413: Import "from OpenStudioLandscapes.engine.constants import DOCKER_USE_CACHE_GLOBAL" should be placed at the top of the module (wrong-import-position)
 src/OpenStudioLandscapes/VERT/constants.py:23:0: C0413: Import "from OpenStudioLandscapes.engine.enums import FeatureVolumeType, OpenStudioLandscapesConfig" should be placed at the top of the module (wrong-import-position)
-src/OpenStudioLandscapes/VERT/constants.py:83:0: C0112: Empty function docstring (empty-docstring)
+src/OpenStudioLandscapes/VERT/constants.py:76:0: C0112: Empty function docstring (empty-docstring)
 src/OpenStudioLandscapes/VERT/constants.py:8:0: W0611: Unused MutableMapping imported from typing (unused-import)
 src/OpenStudioLandscapes/VERT/constants.py:23:0: W0611: Unused FeatureVolumeType imported from OpenStudioLandscapes.engine.enums (unused-import)
 ************* Module OpenStudioLandscapes.VERT.__init__
@@ -51,5 +50,5 @@ src/OpenStudioLandscapes/VERT/__init__.py:1:0: C0103: Module name "VERT" doesn't
 src/OpenStudioLandscapes/VERT/__init__.py:11:4: C0103: Constant name "dist_name" doesn't conform to UPPER_CASE naming style (invalid-name)
 
 ------------------------------------------------------------------
-Your code has been rated at 7.17/10 (previous run: 7.06/10, +0.11)
+Your code has been rated at 7.23/10 (previous run: 7.06/10, +0.17)
 
