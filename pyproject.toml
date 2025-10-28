@@ -94,9 +94,13 @@ code_location_name = "OpenStudioLandscapes-VERT"
 module_name = "OpenStudioLandscapes.VERT.definitions"
 
 [tool.setuptools]
+include-package-data = true
 packages = [
     "OpenStudioLandscapes.VERT",
 ]
 platforms = [
     "Linux",
 ]
+
+[tool.setuptools.package-dir]
+"" = "src"
