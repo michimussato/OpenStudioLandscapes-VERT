@@ -1,0 +1,24 @@
+project:
+  description: VERT Feature for OpenStudioLandscapes
+  name: OpenStudioLandscapes-VERT
+  optional-dependencies:
+    dev:
+    - OpenStudioLandscapes-VERT[testing]
+    - OpenStudioLandscapes-VERT[lint]
+    - OpenStudioLandscapes-VERT[nox]
+    - OpenStudioLandscapes-VERT[sbom]
+    - OpenStudioLandscapes-VERT[coverage]
+    - OpenStudioLandscapes-VERT[readme]
+    nox:
+    - OpenStudioLandscapes-VERT[testing]
+    sbom:
+    - OpenStudioLandscapes-VERT[graphviz]
+  urls:
+    Homepage: https://github.com/michimussato/OpenStudioLandscapes-VERT
+tool:
+  dagster:
+    code_location_name: OpenStudioLandscapes-VERT
+    module_name: OpenStudioLandscapes.VERT.definitions
+  setuptools:
+    packages:
+    - OpenStudioLandscapes.VERT
