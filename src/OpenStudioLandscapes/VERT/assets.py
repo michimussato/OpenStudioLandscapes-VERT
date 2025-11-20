@@ -93,9 +93,9 @@ def compose_networks(
     Output[dict[str, dict[str, dict[str, str]]]] | AssetMaterialization, None, None
 ]:
 
-    compose_network_mode = ComposeNetworkMode.DEFAULT
+    compose_network_mode = DockerComposePolicies.NETWORK_MODE.DEFAULT
 
-    if compose_network_mode == ComposeNetworkMode.DEFAULT:
+    if compose_network_mode is DockerComposePolicies.NETWORK_MODE.DEFAULT:
         docker_dict = {
             "networks": {
                 "vert": {
