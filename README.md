@@ -165,14 +165,11 @@ The following variables are being declared in `OpenStudioLandscapes.VERT.constan
 
 #### Feature Config: default
 
-| Variable                    | Type   | Value                |
-| :-------------------------- | :----- | :------------------- |
-| `DOCKER_USE_CACHE`          | `bool` | `False`              |
-| `HOSTNAME`                  | `str`  | `vert`               |
-| `TELEPORT_ENTRY_POINT_HOST` | `str`  | `{{HOSTNAME}}`       |
-| `TELEPORT_ENTRY_POINT_PORT` | `str`  | `{{VERT_PORT_HOST}}` |
-| `VERT_PORT_HOST`            | `str`  | `3344`               |
-| `VERT_PORT_CONTAINER`       | `str`  | `80`                 |
+| Variable              | Type   | Value   |
+| :-------------------- | :----- | :------ |
+| `DOCKER_USE_CACHE`    | `bool` | `False` |
+| `VERT_PORT_HOST`      | `str`  | `3344`  |
+| `VERT_PORT_CONTAINER` | `str`  | `80`    |
 
 # Community
 
