@@ -1,9 +1,13 @@
 import copy
+import textwrap
 import json
 import pathlib
 from collections import ChainMap
 from functools import reduce
 from typing import Any, Generator, List, MutableMapping
+
+from deepdiff import DeepDiff
+from pydantic_core._pydantic_core import ValidationError
 
 import git
 import yaml
@@ -19,34 +23,22 @@ from dagster import (
 from docker_compose_graph.utils import *
 from docker_compose_graph.yaml_tags.overrides import *
 from git.exc import GitCommandError
-from OpenStudioLandscapes.engine.common_assets.constants import get_constants
 from OpenStudioLandscapes.engine.common_assets.docker_compose_graph import (
     get_docker_compose_graph,
 )
-from OpenStudioLandscapes.engine.common_assets.docker_config import get_docker_config
-from OpenStudioLandscapes.engine.common_assets.docker_config_json import (
-    get_docker_config_json,
-)
-from OpenStudioLandscapes.engine.common_assets.env import get_env
 from OpenStudioLandscapes.engine.common_assets.feature_out import get_feature_out
 from OpenStudioLandscapes.engine.common_assets.group_in import get_group_in
 from OpenStudioLandscapes.engine.common_assets.group_out import get_group_out
+from OpenStudioLandscapes.engine.config.models import ConfigEngine
 from OpenStudioLandscapes.engine.constants import *
 from OpenStudioLandscapes.engine.enums import *
 from OpenStudioLandscapes.engine.utils import *
 from OpenStudioLandscapes.engine.utils.docker.compose_dicts import *
 
 from OpenStudioLandscapes.VERT.constants import *
+from OpenStudioLandscapes.VERT.config.models import Config
 
-constants = get_constants(
-    ASSET_HEADER=ASSET_HEADER,
-)
-
-
-docker_config = get_docker_config(
-    ASSET_HEADER=ASSET_HEADER,
-)
-
+from OpenStudioLandscapes.VERT.config import dist
 
 group_in = get_group_in(
     ASSET_HEADER=ASSET_HEADER,
@@ -54,51 +46,238 @@ group_in = get_group_in(
     input_name=str(GroupIn.BASE_IN),
 )
 
-
-env = get_env(
-    ASSET_HEADER=ASSET_HEADER,
-)
-
-
 group_out = get_group_out(
     ASSET_HEADER=ASSET_HEADER,
 )
-
 
 docker_compose_graph = get_docker_compose_graph(
     ASSET_HEADER=ASSET_HEADER,
 )
 
-
 feature_out = get_feature_out(
     ASSET_HEADER=ASSET_HEADER,
     feature_out_ins={
-        "env": dict,
         "compose": dict,
         "group_in": dict,
+        "CONFIG": Config,
     },
-)
-
-
-docker_config_json = get_docker_config_json(
-    ASSET_HEADER=ASSET_HEADER,
 )
 
 
 @asset(
     **ASSET_HEADER,
+    deps=[
+        # This dep is needed for this Asset
+        # to be evaluated AFTER
+        # upstream Features (Asset Groups)
+        AssetKey([*ASSET_HEADER["key_prefix"], "group_in"]),
+    ],
+    description=textwrap.dedent(
+        """
+        Loads the default `config.yml` that comes with
+        the Feature itself. Contents are being validated
+        against a `pydantic.BaseModel` in this step.
+        """
+    )
+)
+def CONFIG_BLUEPRINT(
+    context: AssetExecutionContext,
+) -> Generator[
+    Output[str] | AssetMaterialization,
+    None,
+    None,
+]:
+
+    with open(pathlib.Path(__file__).parent / "config" / "config_blueprint.yml") as fr:
+        # This is str so that comments are read as well
+        config_str: str = fr.read()
+
+    config = yaml.safe_load(config_str)
+
+    try:
+        context.log.info(f"Validating: {config = }")
+        _config_validated = Config(**config)
+        context.log.debug(f"Validated.")
+    except ValidationError as err:
+        context.log.error(
+            "Config Validation failed. "
+            "The default `config.yml` for "
+            f"{dist.name} contains "
+            "errors, missing and/or illegal parameters."
+        )
+        raise ValidationError from err
+
+    yield Output(config_str)
+
+    diff = DeepDiff(
+        config,
+        # We don't want to compare expanded
+        # with non-expanded dicts - creates too
+        # much noise in the diff
+        _config_validated.model_dump(mode="json")
+    )
+
+    yield AssetMaterialization(
+        asset_key=context.asset_key,
+        metadata={
+            "__".join(context.asset_key.path): MetadataValue.md(f"```yaml\n{config_str}\n```"),
+            "diff": MetadataValue.md(f"```json\n{json.dumps(diff, indent=2, default=str)}\n```"),
+        },
+    )
+
+
+@asset(
+    **ASSET_HEADER,
     ins={
-        "env": AssetIn(
-            AssetKey([*ASSET_HEADER["key_prefix"], "env"]),
+        "group_in": AssetIn(
+            AssetKey([*ASSET_HEADER["key_prefix"], "group_in"]),
+        ),
+        "CONFIG_DEFAULT": AssetIn(
+            AssetKey([*ASSET_HEADER["key_prefix"], "CONFIG_BLUEPRINT"]),
+        ),
+    },
+    description=textwrap.dedent(
+        """
+        Reads options from a custom `config.yml`.
+        If the custom `config.yml` does not exist, it 
+        will be created locally containing default options.
+        """
+    )
+)
+def CONFIG(
+    context: AssetExecutionContext,
+    group_in: dict,  # pylint: disable=redefined-outer-name
+    CONFIG_DEFAULT: str,  # pylint: disable=redefined-outer-name
+) -> Generator[
+    Output[Config]
+    | AssetMaterialization,
+    None,
+    None,
+]:
+
+    env: dict = group_in.pop("env")
+
+    config_engine: ConfigEngine = group_in.pop("config_engine")
+    configs_root: pathlib.Path = config_engine.openstudiolandscapes__configstore_root
+
+    configs_root_feature = pathlib.Path(configs_root, dist.name).expanduser().resolve()
+    configs_root_feature.mkdir(parents=True, exist_ok=True)
+    config_yml = pathlib.Path(configs_root_feature / "config.yml")
+
+    config_default_ = yaml.safe_load(CONFIG_DEFAULT)
+
+    # This is valid as we checked it already
+    config_base = Config(**config_default_)
+
+    if not config_yml.exists():
+        context.log.info(
+            f"No existing config file found. "
+            f"Creating {config_yml.as_posix()}..."
+        )
+        with open(config_yml, "w") as fw:
+            # Just write the exact same
+            # contents to the new file
+            fw.write(CONFIG_DEFAULT)
+            # No need to re-validate
+            # config_validated = Config(**config_base)
+    else:
+        context.log.info(f"Skipping config file creation.")
+
+    context.log.info(
+        f"Reading {config_yml.as_posix()}..."
+    )
+    with open(config_yml, "r") as fr:
+        config_store = yaml.safe_load(fr)
+
+        try:
+            context.log.info(f"Validating: {config_store = }")
+            config_store_validated = Config(
+                # Layer the dicts on top of each other
+                # to create the resulting Config
+                # Todo:
+                #  - [x] is that a safe operation?
+                #        -> No
+                # **{
+                #     **config_default_,
+                #     **config_store,
+                # },
+                **config_store
+            )
+            context.log.debug(f"Validated.")
+        except ValidationError as err:
+            context.log.error(
+                "Config Validation failed. "
+                f"The custom `config.yml` ({config_yml.as_posix()}) for "
+                f"{dist.name} contains "
+                "errors, missing and/or illegal parameters."
+            )
+            raise ValidationError from err
+
+    config = config_store_validated.model_dump(mode="python")
+
+    config_expanded = expand_dict_vars(
+        dict_to_expand=config.copy(),
+        kv={
+            "FEATURE": dist.name,
+            **env,
+        },
+    )
+
+    try:
+        # Final validation of the parsed configs
+        context.log.info(f"Validating: {config_expanded = }")
+        config_validated = Config(**config_expanded)
+        context.log.debug(f"Validated.")
+    except ValidationError as err:
+        context.log.error(
+            "Config Validation failed. "
+            f"The parsed config for "
+            f"{dist.name} contains "
+            "errors, missing and/or illegal parameters."
+        )
+        raise ValidationError from err
+
+    yield Output(config_validated)
+
+    diff = DeepDiff(
+        t1={
+            **config_store,
+            **config_base.model_dump(mode="json")},
+        # We don't want to compare expanded
+        # with non-expanded dicts - creates too
+        # much noise in the diff
+        t2={
+            **config_store_validated.model_dump(mode="json"),
+        },
+    )
+
+    yield AssetMaterialization(
+        asset_key=context.asset_key,
+        metadata={
+            "__".join(context.asset_key.path): MetadataValue.md(f"```json\n{json.dumps(config_validated.model_dump(mode='json'), indent=2, default=str)}\n```"),
+            "config_yml": MetadataValue.path(config_yml),
+            "config_raw": MetadataValue.md(f"```json\n{json.dumps(config, indent=2, default=str)}\n```"),
+            "diff": MetadataValue.md(f"```json\n{json.dumps(diff, indent=2, default=str)}\n```"),
+        },
+    )
+
+
+@asset(
+    **ASSET_HEADER,
+    ins={
+        "group_in": AssetIn(
+            AssetKey([*ASSET_HEADER["key_prefix"], "group_in"]),
         ),
     },
 )
 def compose_networks(
     context: AssetExecutionContext,
-    env: dict,  # pylint: disable=redefined-outer-name
+    group_in: dict,  # pylint: disable=redefined-outer-name
 ) -> Generator[
     Output[dict[str, dict[str, dict[str, str]]]] | AssetMaterialization, None, None
 ]:
+
+    env: dict = group_in.pop("env")
 
     compose_network_mode = DockerComposePolicies.NETWORK_MODE.BRIDGE
 
@@ -117,9 +296,6 @@ def compose_networks(
         metadata={
             "__".join(context.asset_key.path): MetadataValue.json(docker_dict),
             "compose_network_mode": MetadataValue.text(compose_network_mode.value),
-            "docker_dict": MetadataValue.md(
-                f"```json\n{json.dumps(docker_dict, indent=2)}\n```"
-            ),
             "docker_yaml": MetadataValue.md(f"```shell\n{docker_yaml}\n```"),
         },
     )
@@ -167,78 +343,52 @@ def cmd_append(
 
 @asset(
     **ASSET_HEADER,
-)
-def repository_vert(
-    context: AssetExecutionContext,
-) -> Generator[Output[dict[str, str | None]] | AssetMaterialization, None, None]:
-    repository_dict = {
-        "branch": "main",
-        "repository_dir": "VERT",
-        "repository_url": "https://github.com/VERT-sh/VERT.git",
-        "repository_dir_full": None,
-    }
-
-    yield Output(repository_dict)
-
-    yield AssetMaterialization(
-        asset_key=context.asset_key,
-        metadata={
-            "__".join(context.asset_key.path): MetadataValue.json(repository_dict),
-        },
-    )
-
-
-@asset(
-    **ASSET_HEADER,
     ins={
-        "env": AssetIn(
-            AssetKey([*ASSET_HEADER["key_prefix"], "env"]),
+        "group_in": AssetIn(
+            AssetKey([*ASSET_HEADER["key_prefix"], "group_in"]),
         ),
-        "repository_vert": AssetIn(
-            AssetKey([*ASSET_HEADER["key_prefix"], "repository_vert"]),
+        "CONFIG": AssetIn(
+            AssetKey([*ASSET_HEADER["key_prefix"], "CONFIG"]),
         ),
     },
 )
 def clone_repository(
     context: AssetExecutionContext,
-    env: dict,
-    repository_vert: dict[str, str | None],
-) -> Generator[Output[dict[str, str]] | AssetMaterialization, None, None]:
+    group_in: dict,
+    CONFIG: Config,
+) -> Generator[Output[pathlib.Path] | AssetMaterialization, None, None]:
+
+    env: dict = group_in.pop("env")
 
     repo_dir = pathlib.Path(
         env["DOT_LANDSCAPES"],
         env.get("LANDSCAPE", "default"),
-        f"{ASSET_HEADER['group_name']}__{'__'.join(ASSET_HEADER['key_prefix'])}",
+        f"{dist.name}",
         "__".join(context.asset_key.path),
         "repos",
     )
 
-    repository_dir_full = repo_dir / repository_vert["repository_dir"]
+    repository_dir_full = repo_dir / CONFIG.repository_subdir
     repository_dir_full.parent.mkdir(parents=True, exist_ok=True)
-
-    repository_vert["repository_dir_full"] = repository_dir_full.as_posix()
-    repository_vert["docker_compose"] = "docker-compose.yml"
-    repository_vert["docker_compose_worker"] = "docker-compose.worker.yml"
-    context.log.info(repository_vert["repository_dir_full"])
 
     try:
         git.Repo.clone_from(
-            url=repository_vert["repository_url"],
-            to_path=repository_vert["repository_dir_full"],
-            branch=repository_vert["branch"],
+            url=CONFIG.repository_url,
+            to_path=repository_dir_full,
+            branch=CONFIG.repository_branch,
         )
     except GitCommandError as e:
         context.log.warning("Pulling from Repo (%s)" % e)
-        existing_repo = git.Repo(repository_vert["repository_dir_full"])
+        existing_repo = git.Repo(repository_dir_full)
         origin = existing_repo.remotes.origin
         origin.pull()
 
-    yield Output(repository_vert)
+    yield Output(repository_dir_full)
 
     yield AssetMaterialization(
         asset_key=context.asset_key,
         metadata={
-            "__".join(context.asset_key.path): MetadataValue.json(repository_vert),
+            "__".join(context.asset_key.path): MetadataValue.path(repository_dir_full),
         },
     )
 
@@ -248,22 +398,26 @@ def clone_repository(
 @asset(
     **ASSET_HEADER,
     ins={
-        "env": AssetIn(
-            AssetKey([*ASSET_HEADER["key_prefix"], "env"]),
-        ),
         "compose_networks": AssetIn(
             AssetKey([*ASSET_HEADER["key_prefix"], "compose_networks"]),
         ),
         "clone_repository": AssetIn(
             AssetKey([*ASSET_HEADER["key_prefix"], "clone_repository"]),
         ),
+        "CONFIG": AssetIn(
+            AssetKey([*ASSET_HEADER["key_prefix"], "CONFIG"]),
+        ),
+        "group_in": AssetIn(
+            AssetKey([*ASSET_HEADER["key_prefix"], "group_in"]),
+        ),
     },
 )
 def compose(
     context: AssetExecutionContext,
-    env: dict,  # pylint: disable=redefined-outer-name
     compose_networks: dict,  # pylint: disable=redefined-outer-name
-    clone_repository: dict,  # pylint: disable=redefined-outer-name
+    clone_repository: pathlib.Path,  # pylint: disable=redefined-outer-name
+    CONFIG: Config,  # pylint: disable=redefined-outer-name
+    group_in: dict,  # pylint: disable=redefined-outer-name
 ) -> Generator[
     Output[MutableMapping[str, List[MutableMapping[str, List[str]]]]]
     | AssetMaterialization,
@@ -272,13 +426,13 @@ def compose(
 ]:
     """"""
 
-    docker_compose_override = pathlib.Path(
-        env["DOT_LANDSCAPES"],
-        env.get("LANDSCAPE", "default"),
-        f"{ASSET_HEADER['group_name']}__{'__'.join(ASSET_HEADER['key_prefix'])}",
-        "__".join(context.asset_key.path),
-        "docker-compose.override.yml",
-    )
+    env: dict = group_in.pop("env")
+
+    config_engine: ConfigEngine = group_in.pop("config_engine")
+
+    docker_compose_override: pathlib.Path = CONFIG.docker_compose_override
+    context.log.debug(f"{docker_compose_override = }")
+    docker_compose_override.parent.mkdir(parents=True, exist_ok=True)
 
     network_dict = {}
     ports_dict = {}
@@ -288,16 +442,14 @@ def compose(
         ports_dict = {
             "ports": OverrideArray(
                 [
-                    f"{env.get('VERT_PORT_HOST')}:{env.get('VERT_PORT_CONTAINER')}",
+                    f"{CONFIG.vert_port_host}:{CONFIG.vert_port_container}",
                 ]
             ),
         }
     elif "network_mode" in compose_networks:
         network_dict = {"network_mode": compose_networks.get("network_mode")}
 
-    parent = (
-        pathlib.Path(clone_repository["repository_dir_full"]) / "docker-compose.yml"
-    )
+    parent = clone_repository / CONFIG.docker_compose_yml
 
     volumes_dict = {"volumes": []}
 
@@ -323,10 +475,7 @@ def compose(
             # "DOCKER_COMPOSE"
             # => seems to do the trick to make sure, we end up using the directory
             # we intended to use
-            path_src=pathlib.Path(
-                clone_repository["repository_dir_full"],
-                clone_repository["docker_compose"],
-            ),
+            path_src=pathlib.Path(parent),
             path_dst=pathlib.Path(host),
             path_common_root=pathlib.Path(env["DOT_LANDSCAPES"]),
         )
@@ -347,7 +496,7 @@ def compose(
         context=context,
         service_name=service_name,
         landscape_id=env.get("LANDSCAPE", "default"),
-        domain_lan=env.get("OPENSTUDIOLANDSCAPES__DOMAIN_LAN"),
+        domain_lan=config_engine.openstudiolandscapes__domain_lan,
     )
     # container_name = "--".join([f"{service_name}", env.get("LANDSCAPE", "default")])
     # host_name = ".".join([env["HOSTNAME"], env["OPENSTUDIOLANDSCAPES__DOMAIN_LAN"]])
@@ -357,7 +506,7 @@ def compose(
             service_name: {
                 "container_name": container_name,
                 "hostname": host_name,
-                "domainname": env.get("OPENSTUDIOLANDSCAPES__DOMAIN_LAN"),
+                "domainname": config_engine.openstudiolandscapes__domain_lan,
                 **copy.deepcopy(ports_dict),
                 **copy.deepcopy(volumes_dict),
                 **copy.deepcopy(network_dict),
@@ -377,8 +526,6 @@ def compose(
 
     docker_dict = reduce(deep_merge, docker_chainmap.maps)
 
-    docker_compose_override.parent.mkdir(parents=True, exist_ok=True)
-
     docker_yaml_override: str = yaml.dump(docker_dict)
 
     with open(docker_compose_override, "w") as fw:
@@ -391,23 +538,20 @@ def compose(
 
     # Convert absolute paths in `include` to
     # relative ones
-    DOCKER_COMPOSE = pathlib.Path(env["DOCKER_COMPOSE"])
+    DOCKER_COMPOSE = CONFIG.docker_compose
     DOCKER_COMPOSE.parent.mkdir(parents=True, exist_ok=True)
 
     rel_paths = []
     dot_landscapes = pathlib.Path(env["DOT_LANDSCAPES"])
 
-    # Todo:
-    #  - [ ] find a better way to implement relpath with `from` and `via`
-    #  - [ ] externalize
     for path in [
-        parent.as_posix(),
-        docker_compose_override.as_posix(),
+        parent,
+        CONFIG.docker_compose_override,
     ]:
         rel_path = get_relative_path_via_common_root(
             context=context,
-            path_src=DOCKER_COMPOSE,
-            path_dst=pathlib.Path(path),
+            path_src=CONFIG.docker_compose,
+            path_dst=path,
             path_common_root=dot_landscapes,
         )
 
@@ -436,6 +580,6 @@ def compose(
             "docker_yaml_override": MetadataValue.md(
                 f"```yaml\n{docker_yaml_override}\n```"
             ),
-            "path_docker_yaml_override": MetadataValue.path(docker_compose_override),
+            "path_docker_yaml_override": MetadataValue.path(DOCKER_COMPOSE),
         },
     )

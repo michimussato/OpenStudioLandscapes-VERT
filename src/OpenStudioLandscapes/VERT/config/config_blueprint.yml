@@ -1,0 +1,7 @@
+# Base Information
+group_name: "VERT"
+key_prefixes:
+  - "VERT"
+
+vert_port_container: 80
+vert_port_host: 3344
