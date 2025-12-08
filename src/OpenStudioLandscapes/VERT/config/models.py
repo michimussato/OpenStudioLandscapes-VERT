@@ -11,6 +11,8 @@ from OpenStudioLandscapes.VERT.config import dist
 
 class Config(FeatureBaseModel):
     feature_name: str = dist.name
+    compose_scope: str = "default"
+    definitions: str = "OpenStudioLandscapes.VERT.definitions"
 
     docker_compose_override: pathlib.Path = Field(
         default="{DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.override.yml",
