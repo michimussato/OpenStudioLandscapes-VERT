@@ -1,4 +1,5 @@
 import pathlib
+import textwrap
 
 from pydantic import (
     Field,
@@ -7,6 +8,19 @@ from pydantic import (
 
 from OpenStudioLandscapes.engine.config.models import FeatureBaseModel
 from OpenStudioLandscapes.VERT.config import dist
+
+
+CONFIG_STR = textwrap.dedent(
+    """
+    # Base Information
+    group_name: "VERT"
+    key_prefixes:
+      - "VERT"
+    
+    vert_port_container: 80
+    vert_port_host: 3344
+    """
+)
 
 
 class Config(FeatureBaseModel):
