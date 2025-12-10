@@ -30,6 +30,8 @@ from OpenStudioLandscapes.engine.common_assets.feature_out import get_feature_ou
 from OpenStudioLandscapes.engine.common_assets.group_in import get_group_in
 from OpenStudioLandscapes.engine.common_assets.group_out import get_group_out
 from OpenStudioLandscapes.engine.config.models import ConfigEngine
+import OpenStudioLandscapes.engine.discovery.discovery as discovery
+# from OpenStudioLandscapes.engine.discovery import OPENSTUDIOLANDSCAPES__CONFIGSTORE_ROOT
 from OpenStudioLandscapes.engine.constants import *
 from OpenStudioLandscapes.engine.enums import *
 from OpenStudioLandscapes.engine.utils import *
@@ -161,10 +163,10 @@ def CONFIG(
 
     env: dict = group_in.pop("env")
 
-    config_engine: ConfigEngine = group_in.pop("config_engine")
+    # config_engine: ConfigEngine = group_in.pop("config_engine")
 
     # https://jsschools.com/python/5-powerful-python-libraries-for-efficient-file-han/
-    config_yml_object = config_engine.openstudiolandscapes__configstore_root.expanduser().resolve() / dist.name / "config.yml"
+    config_yml_object = discovery.OPENSTUDIOLANDSCAPES__CONFIGSTORE_ROOT.expanduser() / dist.name / "config.yml"
     if not config_yml_object.exists():
         config_yml_object.parent.mkdir(parents=True, exist_ok=True)
         config_yml_object.touch(exist_ok=True)
