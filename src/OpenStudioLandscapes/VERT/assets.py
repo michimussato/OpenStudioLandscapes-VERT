@@ -393,7 +393,7 @@ def compose(
             # "DOCKER_COMPOSE"
             # => seems to do the trick to make sure, we end up using the directory
             # we intended to use
-            path_src=pathlib.Path(parent),
+            path_src=CONFIG.docker_compose_expanded,
             path_dst=pathlib.Path(host),
             path_common_root=pathlib.Path(env["DOT_LANDSCAPES"]),
         )
