@@ -5,6 +5,10 @@ from pydantic import (
     PositiveInt, HttpUrl,
 )
 
+from dagster import get_dagster_logger
+
+LOGGER = get_dagster_logger(__name__)
+
 from OpenStudioLandscapes.engine.config.models import FeatureBaseModel
 from OpenStudioLandscapes.VERT.config import dist
 
@@ -19,7 +23,7 @@ class Config(FeatureBaseModel):
     definitions: str = "OpenStudioLandscapes.VERT.definitions"
 
     docker_compose_override: pathlib.Path = Field(
-        default="{DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.override.yml",
+        default=pathlib.Path("{DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.override.yml"),
         description="The path to the `docker-compose.yml` file.",
     )
     vert_port_container: PositiveInt = Field(
@@ -47,3 +51,23 @@ class Config(FeatureBaseModel):
     docker_compose_worker_yml: str = Field(
         default="docker-compose.worker.yml",
     )
+
+    # EXPANDABLE PATHS
+    @property
+    def docker_compose_override_expanded(self) -> pathlib.Path:
+        LOGGER.debug(f"{self.env = }")
+        if self.env is None:
+            raise KeyError("`env` is `None`.")
+        LOGGER.debug(f"Expanding {self.docker_compose_override}...")
+        ret = pathlib.Path(
+            self.docker_compose_override
+            .expanduser()
+            .as_posix()
+            .format(
+                **{
+                    "FEATURE": self.feature_name,
+                    **self.env,
+                }
+            )
+        )
+        return ret

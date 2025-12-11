@@ -175,7 +175,9 @@ def CONFIG(
     yield AssetMaterialization(
         asset_key=context.asset_key,
         metadata={
-            "__".join(context.asset_key.path): MetadataValue.md(f"```json\n{json.dumps(config_validated.model_dump(mode='json'), indent=2, default=str)}\n```"),
+            "__".join(context.asset_key.path): MetadataValue.md(
+                f"```json\n{config_validated.model_dump_json(fallback=str, indent=2)}\n```"
+            ),
         },
     )
 
@@ -183,19 +185,19 @@ def CONFIG(
 @asset(
     **ASSET_HEADER,
     ins={
-        "group_in": AssetIn(
-            AssetKey([*ASSET_HEADER["key_prefix"], "group_in"]),
+        "CONFIG": AssetIn(
+            AssetKey([*ASSET_HEADER["key_prefix"], "CONFIG"]),
         ),
     },
 )
 def compose_networks(
     context: AssetExecutionContext,
-    group_in: dict,  # pylint: disable=redefined-outer-name
+    CONFIG: Config,
 ) -> Generator[
     Output[dict[str, dict[str, dict[str, str]]]] | AssetMaterialization, None, None
 ]:
 
-    env: dict = group_in.pop("env")
+    env: dict = CONFIG.env
 
     compose_network_mode = DockerComposePolicies.NETWORK_MODE.BRIDGE
 
@@ -262,9 +264,6 @@ def cmd_append(
 @asset(
     **ASSET_HEADER,
     ins={
-        "group_in": AssetIn(
-            AssetKey([*ASSET_HEADER["key_prefix"], "group_in"]),
-        ),
         "CONFIG": AssetIn(
             AssetKey([*ASSET_HEADER["key_prefix"], "CONFIG"]),
         ),
@@ -272,11 +271,10 @@ def cmd_append(
 )
 def clone_repository(
     context: AssetExecutionContext,
-    group_in: dict,
     CONFIG: Config,
 ) -> Generator[Output[pathlib.Path] | AssetMaterialization, None, None]:
 
-    env: dict = group_in.pop("env")
+    env: dict = CONFIG.env
 
     repo_dir = pathlib.Path(
         env["DOT_LANDSCAPES"],
@@ -325,9 +323,6 @@ def clone_repository(
         "CONFIG": AssetIn(
             AssetKey([*ASSET_HEADER["key_prefix"], "CONFIG"]),
         ),
-        "group_in": AssetIn(
-            AssetKey([*ASSET_HEADER["key_prefix"], "group_in"]),
-        ),
     },
 )
 def compose(
@@ -335,7 +330,6 @@ def compose(
     compose_networks: dict,  # pylint: disable=redefined-outer-name
     clone_repository: pathlib.Path,  # pylint: disable=redefined-outer-name
     CONFIG: Config,  # pylint: disable=redefined-outer-name
-    group_in: dict,  # pylint: disable=redefined-outer-name
 ) -> Generator[
     Output[MutableMapping[str, List[MutableMapping[str, List[str]]]]]
     | AssetMaterialization,
@@ -344,11 +338,11 @@ def compose(
 ]:
     """"""
 
-    env: dict = group_in.pop("env")
+    env: dict = CONFIG.env
 
-    config_engine: ConfigEngine = group_in.pop("config_engine")
+    config_engine: ConfigEngine = CONFIG.config_engine
 
-    docker_compose_override: pathlib.Path = CONFIG.docker_compose_override
+    docker_compose_override: pathlib.Path = CONFIG.docker_compose_override_expanded
     context.log.debug(f"{docker_compose_override = }")
     docker_compose_override.parent.mkdir(parents=True, exist_ok=True)
 
@@ -456,7 +450,7 @@ def compose(
 
     # Convert absolute paths in `include` to
     # relative ones
-    DOCKER_COMPOSE = CONFIG.docker_compose
+    DOCKER_COMPOSE = CONFIG.docker_compose_expanded
     DOCKER_COMPOSE.parent.mkdir(parents=True, exist_ok=True)
 
     rel_paths = []
@@ -464,11 +458,13 @@ def compose(
 
     for path in [
         parent,
-        CONFIG.docker_compose_override,
+        CONFIG.docker_compose_override_expanded,
     ]:
+
+        context.log.debug(f"{path = }")
         rel_path = get_relative_path_via_common_root(
             context=context,
-            path_src=CONFIG.docker_compose,
+            path_src=CONFIG.docker_compose_expanded,
             path_dst=path,
             path_common_root=dot_landscapes,
         )
