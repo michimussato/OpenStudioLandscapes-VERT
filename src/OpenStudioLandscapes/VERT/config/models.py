@@ -1,5 +1,4 @@
 import pathlib
-import textwrap
 
 from pydantic import (
     Field,
@@ -10,17 +9,8 @@ from OpenStudioLandscapes.engine.config.models import FeatureBaseModel
 from OpenStudioLandscapes.VERT.config import dist
 
 
-CONFIG_STR = textwrap.dedent(
-    """
-    # Base Information
-    group_name: "VERT"
-    key_prefixes:
-      - "VERT"
-    
-    vert_port_container: 80
-    vert_port_host: 3344
-    """
-)
+config_default = pathlib.Path(__file__).parent.joinpath("config_default.yml")
+CONFIG_STR = config_default.read_text()
 
 
 class Config(FeatureBaseModel):
