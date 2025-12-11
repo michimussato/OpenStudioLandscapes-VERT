@@ -29,13 +29,13 @@ from OpenStudioLandscapes.engine.common_assets.docker_compose_graph import (
 from OpenStudioLandscapes.engine.common_assets.feature_out import get_feature_out
 from OpenStudioLandscapes.engine.common_assets.group_in import get_group_in
 from OpenStudioLandscapes.engine.common_assets.group_out import get_group_out
-from OpenStudioLandscapes.engine.config.models import ConfigEngine
+from OpenStudioLandscapes.engine.config.models import ConfigEngine, DockerConfigModel
 import OpenStudioLandscapes.engine.discovery.discovery as discovery
-# from OpenStudioLandscapes.engine.discovery import OPENSTUDIOLANDSCAPES__CONFIGSTORE_ROOT
 from OpenStudioLandscapes.engine.constants import *
 from OpenStudioLandscapes.engine.enums import *
 from OpenStudioLandscapes.engine.utils import *
 from OpenStudioLandscapes.engine.utils.docker.compose_dicts import *
+from OpenStudioLandscapes.engine.discovery.get_feature_base_model import get_feature_base_model
 
 from OpenStudioLandscapes.VERT.constants import *
 from OpenStudioLandscapes.VERT.config.models import Config, CONFIG_STR
@@ -155,7 +155,7 @@ def CONFIG(
     context: AssetExecutionContext,
     group_in: dict,  # pylint: disable=redefined-outer-name
 ) -> Generator[
-    Output[Config]
+    Output[discovery.FeatureBaseModel]
     | AssetMaterialization,
     None,
     None,
@@ -163,41 +163,12 @@ def CONFIG(
 
     env: dict = group_in.pop("env")
 
-    # config_engine: ConfigEngine = group_in.pop("config_engine")
-
-    # https://jsschools.com/python/5-powerful-python-libraries-for-efficient-file-han/
-    config_yml_object = discovery.OPENSTUDIOLANDSCAPES__CONFIGSTORE_ROOT.expanduser() / dist.name / "config.yml"
-    if not config_yml_object.exists():
-        config_yml_object.parent.mkdir(parents=True, exist_ok=True)
-        config_yml_object.touch(exist_ok=True)
-        config_yml_object.write_text(CONFIG_STR)
-    config_dict: dict = yaml.safe_load(config_yml_object.read_text())
-
-    config_expanded = expand_dict_vars(
-        dict_to_expand=config_dict.copy(),
-        kv={
-            "FEATURE": dist.name,
-            **env,
-        },
+    config_validated: discovery.FeatureBaseModel = get_feature_base_model(
+        context=context,
+        discovered_models=discovery.DISCOVERED_MODELS,
+        distribution=dist,
     )
-
-    try:
-        context.log.info(f"Validating: {config_expanded = }")
-        config_validated = Config(
-            config_file_path=config_yml_object,
-            **config_expanded,
-        )
-        context.log.debug(f"Validated.")
-        context.log.debug(f"{Config = }")
-        # context.pdb.set_trace()
-    except ValidationError as err:
-        context.log.error(
-            "Config Validation failed. "
-            f"The parsed config for "
-            f"{dist.name} contains "
-            "errors, missing and/or illegal parameters."
-        )
-        raise ValidationError from err
+    config_validated.env = env
 
     yield Output(config_validated)
 
@@ -205,9 +176,6 @@ def CONFIG(
         asset_key=context.asset_key,
         metadata={
             "__".join(context.asset_key.path): MetadataValue.md(f"```json\n{json.dumps(config_validated.model_dump(mode='json'), indent=2, default=str)}\n```"),
-            "config_yml_path": MetadataValue.path(config_yml_object),
-            "config_dict_expanded": MetadataValue.md(f"```json\n{json.dumps(config_expanded, indent=2, default=str)}\n```"),
-            "config_dict_raw": MetadataValue.md(f"```json\n{json.dumps(config_dict, indent=2, default=str)}\n```"),
         },
     )
 
