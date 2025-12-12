@@ -2,7 +2,11 @@ __all__ = [
     "ASSET_HEADER",
 ]
 
-GROUP = "VERT"
+from OpenStudioLandscapes.VERT import dist
+
+# Todo
+#  - [ ] fix this naive replacement logic
+GROUP = dist.name.replace("-", "_")
 KEY = [GROUP]
 
 ASSET_HEADER = {
