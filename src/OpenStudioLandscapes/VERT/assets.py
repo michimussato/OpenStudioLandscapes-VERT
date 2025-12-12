@@ -61,7 +61,7 @@ feature_out = get_feature_out(
     feature_out_ins={
         "compose": dict,
         "group_in": dict,
-        "CONFIG": Config,
+        "CONFIG": discovery.FeatureBaseModel,
     },
 )
 
@@ -166,8 +166,12 @@ def CONFIG(
     config_validated: discovery.FeatureBaseModel = get_feature_base_model(
         context=context,
         discovered_models=discovery.DISCOVERED_MODELS,
-        distribution=dist,
+        search_instance_type=Config,
     )
+
+    # Make sure the config is an instance of a Kitsu Config
+    assert isinstance(config_validated, Config)
+
     config_validated.env = env
 
     yield Output(config_validated)
@@ -192,7 +196,7 @@ def CONFIG(
 )
 def compose_networks(
     context: AssetExecutionContext,
-    CONFIG: Config,
+    CONFIG: discovery.FeatureBaseModel,
 ) -> Generator[
     Output[dict[str, dict[str, dict[str, str]]]] | AssetMaterialization, None, None
 ]:
@@ -271,7 +275,7 @@ def cmd_append(
 )
 def clone_repository(
     context: AssetExecutionContext,
-    CONFIG: Config,
+    CONFIG: discovery.FeatureBaseModel,
 ) -> Generator[Output[pathlib.Path] | AssetMaterialization, None, None]:
 
     env: dict = CONFIG.env
@@ -329,7 +333,7 @@ def compose(
     context: AssetExecutionContext,
     compose_networks: dict,  # pylint: disable=redefined-outer-name
     clone_repository: pathlib.Path,  # pylint: disable=redefined-outer-name
-    CONFIG: Config,  # pylint: disable=redefined-outer-name
+    CONFIG: discovery.FeatureBaseModel,  # pylint: disable=redefined-outer-name
 ) -> Generator[
     Output[MutableMapping[str, List[MutableMapping[str, List[str]]]]]
     | AssetMaterialization,
