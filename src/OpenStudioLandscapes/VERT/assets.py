@@ -1,15 +1,13 @@
 import copy
-import textwrap
 import json
 import pathlib
+import textwrap
 from collections import ChainMap
 from functools import reduce
 from typing import Any, Generator, List, MutableMapping
 
-from deepdiff import DeepDiff
-from pydantic_core._pydantic_core import ValidationError
-
 import git
+import OpenStudioLandscapes.engine.discovery.discovery as discovery
 import yaml
 from dagster import (
     AssetExecutionContext,
@@ -29,18 +27,18 @@ from OpenStudioLandscapes.engine.common_assets.docker_compose_graph import (
 from OpenStudioLandscapes.engine.common_assets.feature_out import get_feature_out
 from OpenStudioLandscapes.engine.common_assets.group_in import get_group_in
 from OpenStudioLandscapes.engine.common_assets.group_out import get_group_out
-from OpenStudioLandscapes.engine.config.models import ConfigEngine, DockerConfigModel
-import OpenStudioLandscapes.engine.discovery.discovery as discovery
+from OpenStudioLandscapes.engine.config.models import ConfigEngine
 from OpenStudioLandscapes.engine.constants import *
+from OpenStudioLandscapes.engine.discovery.get_feature_base_model import (
+    get_feature_base_model,
+)
 from OpenStudioLandscapes.engine.enums import *
 from OpenStudioLandscapes.engine.utils import *
 from OpenStudioLandscapes.engine.utils.docker.compose_dicts import *
-from OpenStudioLandscapes.engine.discovery.get_feature_base_model import get_feature_base_model
-
-from OpenStudioLandscapes.VERT.constants import *
-from OpenStudioLandscapes.VERT.config.models import Config, CONFIG_STR
 
 from OpenStudioLandscapes.VERT.config import dist
+from OpenStudioLandscapes.VERT.config.models import CONFIG_STR, Config
+from OpenStudioLandscapes.VERT.constants import *
 
 group_in = get_group_in(
     ASSET_HEADER=ASSET_HEADER,
@@ -149,14 +147,13 @@ For reference, the default `config.yml` looks as follows:
 {CONFIG_STR}
 ```
 """
-    )
+    ),
 )
 def CONFIG(
     context: AssetExecutionContext,
     group_in: dict,  # pylint: disable=redefined-outer-name
 ) -> Generator[
-    Output[discovery.FeatureBaseModel]
-    | AssetMaterialization,
+    Output[discovery.FeatureBaseModel] | AssetMaterialization,
     None,
     None,
 ]:
