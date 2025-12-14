@@ -1,10 +1,9 @@
 import copy
-import json
+import enum
 import pathlib
-import textwrap
 from collections import ChainMap
 from functools import reduce
-from typing import Any, Generator, List, MutableMapping
+from typing import Generator, List, MutableMapping
 
 import git
 import OpenStudioLandscapes.engine.discovery.discovery as discovery
@@ -29,9 +28,6 @@ from OpenStudioLandscapes.engine.common_assets.group_in import get_group_in
 from OpenStudioLandscapes.engine.common_assets.group_out import get_group_out
 from OpenStudioLandscapes.engine.config.models import ConfigEngine
 from OpenStudioLandscapes.engine.constants import *
-from OpenStudioLandscapes.engine.discovery.get_feature_base_model import (
-    get_feature_base_model,
-)
 from OpenStudioLandscapes.engine.enums import *
 from OpenStudioLandscapes.engine.utils import *
 from OpenStudioLandscapes.engine.utils.docker.compose_dicts import *
@@ -39,6 +35,31 @@ from OpenStudioLandscapes.engine.utils.docker.compose_dicts import *
 from OpenStudioLandscapes.VERT import dist
 from OpenStudioLandscapes.VERT.config.models import CONFIG_STR, Config
 from OpenStudioLandscapes.VERT.constants import *
+
+from OpenStudioLandscapes.engine.common_assets.compose_scope import (
+get_compose_scope_group__cmd,
+)
+
+from OpenStudioLandscapes.engine.common_assets.feature import (
+get_feature__CONFIG
+)
+
+# https://github.com/yaml/pyyaml/issues/722#issuecomment-1969292770
+yaml.SafeDumper.add_multi_representer(
+    data_type=enum.Enum,
+    representer=yaml.representer.SafeRepresenter.represent_str,
+)
+
+
+compose_scope_group__cmd = get_compose_scope_group__cmd(
+    ASSET_HEADER=ASSET_HEADER,
+)
+
+CONFIG = get_feature__CONFIG(
+    ASSET_HEADER=ASSET_HEADER,
+    CONFIG_STR=CONFIG_STR,
+    search_model_of_type=Config,
+)
 
 group_in = get_group_in(
     ASSET_HEADER=ASSET_HEADER,
@@ -62,60 +83,6 @@ feature_out = get_feature_out(
         "CONFIG": discovery.FeatureBaseModel,
     },
 )
-
-
-@asset(
-    **ASSET_HEADER,
-    ins={
-        "group_in": AssetIn(
-            AssetKey([*ASSET_HEADER["key_prefix"], "group_in"]),
-        ),
-    },
-    description=textwrap.dedent(
-        f"""
-Reads options from a custom `config.yml`.
-If the custom `config.yml` does not exist, it 
-will be created locally containing default options.
-
----
-
-For reference, the default `config.yml` looks as follows:
-        
-```yaml
-{CONFIG_STR}
-```
-"""
-    ),
-)
-def CONFIG(
-    context: AssetExecutionContext,
-    group_in: dict,  # pylint: disable=redefined-outer-name
-) -> Generator[
-    Output[discovery.FeatureBaseModel] | AssetMaterialization,
-    None,
-    None,
-]:
-
-    env: dict = group_in.pop("env")
-
-    config_validated: discovery.FeatureBaseModel = get_feature_base_model(
-        context=context,
-        discovered_models=discovery.DISCOVERED_MODELS,
-        search_instance_type=Config,
-    )
-
-    config_validated.env = env
-
-    yield Output(config_validated)
-
-    yield AssetMaterialization(
-        asset_key=context.asset_key,
-        metadata={
-            "__".join(context.asset_key.path): MetadataValue.md(
-                f"```yaml\n{yaml.safe_dump(json.loads(config_validated.model_dump_json(fallback=str, indent=2)))}\n```"
-            ),
-        },
-    )
 
 
 @asset(
@@ -153,52 +120,6 @@ def compose_networks(
             "__".join(context.asset_key.path): MetadataValue.json(docker_dict),
             "compose_network_mode": MetadataValue.text(compose_network_mode.value),
             "docker_yaml": MetadataValue.md(f"```shell\n{docker_yaml}\n```"),
-        },
-    )
-
-
-@asset(
-    **ASSET_HEADER,
-    ins={},
-)
-def cmd_extend(
-    context: AssetExecutionContext,
-) -> Generator[Output[list[Any]] | AssetMaterialization | Any, Any, None]:
-    # Todo
-    #  - [ ] use `OpenStudioLandscapes.engine.base.ops.factories.factory_compose_scope__cmd`
-    #        instead
-
-    ret = []
-
-    yield Output(ret)
-
-    yield AssetMaterialization(
-        asset_key=context.asset_key,
-        metadata={
-            "__".join(context.asset_key.path): MetadataValue.json(ret),
-        },
-    )
-
-
-@asset(
-    **ASSET_HEADER,
-    ins={},
-)
-def cmd_append(
-    context: AssetExecutionContext,
-) -> Generator[Output[dict[str, list[Any]]] | AssetMaterialization | Any, Any, None]:
-    # Todo
-    #  - [ ] use `OpenStudioLandscapes.engine.base.ops.factories.factory_compose_scope__cmd`
-    #        instead
-
-    ret = {"cmd": [], "exclude_from_quote": ["$(which docker)"]}
-
-    yield Output(ret)
-
-    yield AssetMaterialization(
-        asset_key=context.asset_key,
-        metadata={
-            "__".join(context.asset_key.path): MetadataValue.json(ret),
         },
     )
 
