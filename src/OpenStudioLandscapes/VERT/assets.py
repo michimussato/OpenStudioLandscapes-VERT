@@ -64,68 +64,6 @@ feature_out = get_feature_out(
 )
 
 
-# @asset(
-#     **ASSET_HEADER,
-#     deps=[
-#         # This dep is needed for this Asset
-#         # to be evaluated AFTER
-#         # upstream Features (Asset Groups)
-#         AssetKey([*ASSET_HEADER["key_prefix"], "group_in"]),
-#     ],
-#     description=textwrap.dedent(
-#         """
-#         Loads the default `config.yml` that comes with
-#         the Feature itself. Contents are being validated
-#         against a `pydantic.BaseModel` in this step.
-#         """
-#     )
-# )
-# def CONFIG_BLUEPRINT(
-#     context: AssetExecutionContext,
-# ) -> Generator[
-#     Output[str] | AssetMaterialization,
-#     None,
-#     None,
-# ]:
-#
-#     with open(pathlib.Path(__file__).parent / "config" / "config_blueprint.yml") as fr:
-#         # This is str so that comments are read as well
-#         config_str: str = fr.read()
-#
-#     config = yaml.safe_load(config_str)
-#
-#     try:
-#         context.log.info(f"Validating: {config = }")
-#         _config_validated = Config(**config)
-#         context.log.debug(f"Validated.")
-#     except ValidationError as err:
-#         context.log.error(
-#             "Config Validation failed. "
-#             "The default `config.yml` for "
-#             f"{dist.name} contains "
-#             "errors, missing and/or illegal parameters."
-#         )
-#         raise ValidationError from err
-#
-#     yield Output(config_str)
-#
-#     diff = DeepDiff(
-#         config,
-#         # We don't want to compare expanded
-#         # with non-expanded dicts - creates too
-#         # much noise in the diff
-#         _config_validated.model_dump(mode="json")
-#     )
-#
-#     yield AssetMaterialization(
-#         asset_key=context.asset_key,
-#         metadata={
-#             "__".join(context.asset_key.path): MetadataValue.md(f"```yaml\n{config_str}\n```"),
-#             "diff": MetadataValue.md(f"```json\n{json.dumps(diff, indent=2, default=str)}\n```"),
-#         },
-#     )
-
-
 @asset(
     **ASSET_HEADER,
     ins={
