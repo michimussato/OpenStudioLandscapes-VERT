@@ -18,8 +18,9 @@ CONFIG_STR = config_default.read_text()
 
 
 class Config(FeatureBaseModel):
+
     feature_name: str = dist.name
-    compose_scope: str = "default"
+
     definitions: str = "OpenStudioLandscapes.VERT.definitions"
 
     docker_compose_override: pathlib.Path = Field(
