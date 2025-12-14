@@ -36,7 +36,7 @@ from OpenStudioLandscapes.engine.enums import *
 from OpenStudioLandscapes.engine.utils import *
 from OpenStudioLandscapes.engine.utils.docker.compose_dicts import *
 
-from OpenStudioLandscapes.VERT.config import dist
+from OpenStudioLandscapes.VERT import dist
 from OpenStudioLandscapes.VERT.config.models import CONFIG_STR, Config
 from OpenStudioLandscapes.VERT.constants import *
 

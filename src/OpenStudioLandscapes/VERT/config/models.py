@@ -11,7 +11,7 @@ LOGGER = get_dagster_logger(__name__)
 
 from OpenStudioLandscapes.engine.config.models import FeatureBaseModel
 
-from OpenStudioLandscapes.VERT.config import dist
+from OpenStudioLandscapes.VERT import dist
 
 config_default = pathlib.Path(__file__).parent.joinpath("config_default.yml")
 CONFIG_STR = config_default.read_text()
