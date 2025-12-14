@@ -51,9 +51,9 @@ class Config(FeatureBaseModel):
     docker_compose_yml: str = Field(
         default="docker-compose.yml",
     )
-    docker_compose_worker_yml: str = Field(
-        default="docker-compose.worker.yml",
-    )
+    # docker_compose_worker_yml: str = Field(
+    #     default="docker-compose.worker.yml",
+    # )
 
     # EXPANDABLE PATHS
     @property

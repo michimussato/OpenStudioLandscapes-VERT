@@ -207,7 +207,7 @@ def cmd_append(
 )
 def clone_repository(
     context: AssetExecutionContext,
-    CONFIG: Config,
+    CONFIG: Config,  # pylint: disable=redefined-outer-name
 ) -> Generator[Output[pathlib.Path] | AssetMaterialization, None, None]:
 
     env: dict = CONFIG.env
