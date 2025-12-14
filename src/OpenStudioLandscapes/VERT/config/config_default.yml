@@ -5,5 +5,5 @@ key_prefixes:
 
 compose_scope: "default"
 
-vert_port_container: 80
+# vert_port_container: 80
 vert_port_host: 3344
