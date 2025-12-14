@@ -190,7 +190,7 @@ def CONFIG(
 )
 def compose_networks(
     context: AssetExecutionContext,
-    CONFIG: discovery.FeatureBaseModel,
+    CONFIG: Config,
 ) -> Generator[
     Output[dict[str, dict[str, dict[str, str]]]] | AssetMaterialization, None, None
 ]:
@@ -269,7 +269,7 @@ def cmd_append(
 )
 def clone_repository(
     context: AssetExecutionContext,
-    CONFIG: discovery.FeatureBaseModel,
+    CONFIG: Config,
 ) -> Generator[Output[pathlib.Path] | AssetMaterialization, None, None]:
 
     env: dict = CONFIG.env
@@ -327,14 +327,28 @@ def compose(
     context: AssetExecutionContext,
     compose_networks: dict,  # pylint: disable=redefined-outer-name
     clone_repository: pathlib.Path,  # pylint: disable=redefined-outer-name
-    CONFIG: discovery.FeatureBaseModel,  # pylint: disable=redefined-outer-name
+    CONFIG: Config,  # pylint: disable=redefined-outer-name
 ) -> Generator[
     Output[MutableMapping[str, List[MutableMapping[str, List[str]]]]]
     | AssetMaterialization,
     None,
     None,
 ]:
-    """"""
+    """
+    Non-standard (non-factory) implementation of `compose` Asset
+    Other non-standard examples:
+        - `OpenStudioLandscapes.Ayon.assets.compose`
+        - `OpenStudioLandscapes.VERT.assets.compose`
+
+    Args:
+        context:
+        compose_networks:
+        clone_repository:
+        CONFIG:
+
+    Returns:
+
+    """
 
     env: dict = CONFIG.env
 
