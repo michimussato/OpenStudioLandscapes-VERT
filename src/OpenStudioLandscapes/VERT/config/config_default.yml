@@ -3,5 +3,7 @@ group_name: "OpenStudioLandscapes_VERT"
 key_prefixes:
   - "OpenStudioLandscapes_VERT"
 
+compose_scope: "default"
+
 vert_port_container: 80
 vert_port_host: 3344
