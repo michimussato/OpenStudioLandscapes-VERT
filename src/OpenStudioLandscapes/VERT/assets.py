@@ -3,7 +3,7 @@ import enum
 import pathlib
 from collections import ChainMap
 from functools import reduce
-from typing import Generator, List, MutableMapping, Union
+from typing import Generator, List, Dict, Union
 
 import git
 import yaml
@@ -112,10 +112,10 @@ def compose_networks(
     context: AssetExecutionContext,
     CONFIG: Config,
 ) -> Generator[
-    Output[dict[str, dict[str, dict[str, str]]]] | AssetMaterialization, None, None
+    Output[Dict[str, Dict[str, Dict[str, str]]]] | AssetMaterialization, None, None
 ]:
 
-    env: dict = CONFIG.env
+    env: Dict = CONFIG.env
 
     compose_network_mode = DockerComposePolicies.NETWORK_MODE.BRIDGE
 
@@ -152,7 +152,7 @@ def clone_repository(
     CONFIG: Config,  # pylint: disable=redefined-outer-name
 ) -> Generator[Output[pathlib.Path] | AssetMaterialization, None, None]:
 
-    env: dict = CONFIG.env
+    env: Dict = CONFIG.env
 
     repo_dir = pathlib.Path(
         env["DOT_LANDSCAPES"],
@@ -205,11 +205,11 @@ def clone_repository(
 )
 def compose(
     context: AssetExecutionContext,
-    compose_networks: dict,  # pylint: disable=redefined-outer-name
+    compose_networks: Dict,  # pylint: disable=redefined-outer-name
     clone_repository: pathlib.Path,  # pylint: disable=redefined-outer-name
     CONFIG: Config,  # pylint: disable=redefined-outer-name
 ) -> Generator[
-    Output[MutableMapping[str, List[MutableMapping[str, List[str]]]]]
+    Output[Dict[str, List[Dict[str, List[str]]]]]
     | AssetMaterialization,
     None,
     None,
@@ -230,7 +230,7 @@ def compose(
 
     """
 
-    env: dict = CONFIG.env
+    env: Dict = CONFIG.env
 
     config_engine: ConfigEngine = CONFIG.config_engine
 
