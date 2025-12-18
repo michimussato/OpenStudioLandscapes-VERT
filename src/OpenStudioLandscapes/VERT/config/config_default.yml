@@ -3,7 +3,16 @@ group_name: "OpenStudioLandscapes_VERT"
 key_prefixes:
   - "OpenStudioLandscapes_VERT"
 
-compose_scope: "default"
+#compose_scope: "default"
 
-# vert_port_container: 80
-vert_port_host: 3344
+#enabled: true
+
+#docker_compose_override: "{DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.override.yml"
+
+#vert_port_container: 80
+#vert_port_host: 4545
+
+#repository_url: "https://github.com/VERT-sh/VERT.git"
+#repository_branch: "main"
+#repository_subdir: "VERT"
+#docker_compose_yml: "docker-compose.yml"
