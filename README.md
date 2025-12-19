@@ -5,7 +5,6 @@
 1. [Feature: OpenStudioLandscapes-VERT](#feature-openstudiolandscapes-vert)
    1. [Brief](#brief)
    2. [Configuration](#configuration)
-   3. [Official Resources](#official-resources)
 2. [Official Resources](#official-resources)
 3. [Community](#community)
 4. [Technical Reference](#technical-reference)
@@ -80,8 +79,6 @@ key_prefixes:
 ```
 
 ***
-
-## Official Resources
 
 # Official Resources
 
@@ -213,4 +210,4 @@ Currently, the following Python interpreters are enabled for testing:
 
 ***
 
-Last changed: **2025-12-19 15:51:44 UTC**.
+Last changed: **2025-12-19 16:41:36 UTC**
