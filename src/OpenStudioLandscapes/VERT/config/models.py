@@ -40,7 +40,7 @@ class Config(FeatureBaseModel):
         frozen=True,
     )
     vert_port_host: PositiveInt = Field(
-        default=4545,
+        default=4546,
         description="The VERT host port.",
         frozen=False,
     )

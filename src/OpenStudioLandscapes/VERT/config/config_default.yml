@@ -10,7 +10,7 @@ key_prefixes:
 #docker_compose_override: "{DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.override.yml"
 
 #vert_port_container: 80
-#vert_port_host: 4545
+#vert_port_host: 4546
 
 #repository_url: "https://github.com/VERT-sh/VERT.git"
 #repository_branch: "main"
