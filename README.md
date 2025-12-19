@@ -5,7 +5,7 @@
 1. [Feature: OpenStudioLandscapes-VERT](#feature-openstudiolandscapes-vert)
    1. [Brief](#brief)
    2. [Configuration](#configuration)
-2. [Official Resources](#official-resources)
+2. [External Resources](#external-resources)
 3. [Community](#community)
 4. [Technical Reference](#technical-reference)
    1. [Requirements](#requirements)
@@ -80,7 +80,7 @@ key_prefixes:
 
 ***
 
-# Official Resources
+# External Resources
 
 [![Logo VERT ](https://github.com/user-attachments/assets/bf441748-0ec5-4c8a-b3e5-11301ee3f0bd)](https://vert.sh)
 
@@ -210,4 +210,4 @@ Currently, the following Python interpreters are enabled for testing:
 
 ***
 
-Last changed: **2025-12-19 16:47:58 UTC**
+Last changed: **2025-12-19 21:11:39 UTC**
