@@ -219,6 +219,7 @@ def compose(
     Other non-standard examples:
         - `OpenStudioLandscapes.Ayon.assets.compose`
         - `OpenStudioLandscapes.VERT.assets.compose`
+        - `OpenStudioLandscapes.OpenCue.assets.compose`
 
     Args:
         context:
