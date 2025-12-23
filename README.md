@@ -357,9 +357,6 @@ repository_subdir: VERT
 # Examples:
 #     None
 docker_compose_yml: docker-compose.yml
-
-
-
 ```
 
 ***
@@ -494,4 +491,4 @@ Currently, the following Python interpreters are enabled for testing:
 
 ***
 
-Last changed: **2025-12-23 13:35:06 UTC**
+Last changed: **2025-12-23 13:37:26 UTC**
