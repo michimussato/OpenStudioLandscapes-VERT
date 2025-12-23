@@ -63,10 +63,17 @@ The following settings are available in `OpenStudioLandscapes-VERT` and are acce
 #
 # Type: typing.Dict
 # Base Class:
+#     Required: False
 #     Description:
 #         None
 #     Default value:
 #         None
+# Description:
+#     None
+# Required: False
+#     None
+# Examples:
+#     None
 
 
 # =============
@@ -75,10 +82,17 @@ The following settings are available in `OpenStudioLandscapes-VERT` and are acce
 #
 # Type: <class 'OpenStudioLandscapes.engine.config.models.ConfigEngine'>
 # Base Class:
+#     Required: False
 #     Description:
 #         None
 #     Default value:
 #         None
+# Description:
+#     None
+# Required: False
+#     None
+# Examples:
+#     None
 
 
 # =============
@@ -87,10 +101,17 @@ The following settings are available in `OpenStudioLandscapes-VERT` and are acce
 #
 # Type: <class 'OpenStudioLandscapes.engine.config.models.FeatureBaseModel'>
 # Base Class:
+#     Required: False
 #     Description:
 #         None
 #     Default value:
 #         None
+# Description:
+#     None
+# Required: False
+#     None
+# Examples:
+#     None
 
 
 # ============
@@ -99,10 +120,17 @@ The following settings are available in `OpenStudioLandscapes-VERT` and are acce
 #
 # Type: <class 'importlib.metadata.Distribution'>
 # Base Class:
+#     Required: False
 #     Description:
 #         None
 #     Default value:
 #         None
+# Description:
+#     None
+# Required: False
+#     None
+# Examples:
+#     None
 
 
 # ==========
@@ -111,10 +139,17 @@ The following settings are available in `OpenStudioLandscapes-VERT` and are acce
 #
 # Type: <class 'str'>
 # Base Class:
+#     Required: False
 #     Description:
 #         None
 #     Default value:
 #         None
+# Description:
+#     None
+# Required: False
+#     None
+# Examples:
+#     None
 group_name: OpenStudioLandscapes_VERT
 
 
@@ -124,10 +159,17 @@ group_name: OpenStudioLandscapes_VERT
 #
 # Type: typing.List[str]
 # Base Class:
+#     Required: False
 #     Description:
 #         None
 #     Default value:
 #         None
+# Description:
+#     None
+# Required: False
+#     None
+# Examples:
+#     None
 key_prefixes:
 - OpenStudioLandscapes_VERT
 
@@ -138,10 +180,17 @@ key_prefixes:
 #
 # Type: <class 'bool'>
 # Base Class:
+#     Required: False
 #     Description:
 #         Whether the Feature is enabled or not.
 #     Default value:
 #         True
+# Description:
+#     Whether the Feature is enabled or not.
+# Required: False
+#     Whether the Feature is enabled or not.
+# Examples:
+#     None
 
 
 # =============
@@ -150,10 +199,17 @@ key_prefixes:
 #
 # Type: <class 'str'>
 # Base Class:
+#     Required: False
 #     Description:
 #         None
 #     Default value:
 #         default
+# Description:
+#     None
+# Required: False
+#     None
+# Examples:
+#     ['default', 'license_server', 'worker']
 
 
 # ============
@@ -162,10 +218,17 @@ key_prefixes:
 #
 # Type: <class 'str'>
 # Base Class:
+#     Required: True
 #     Description:
 #         The name of the feature. It is derived from the `OpenStudioLandscapes.<Feature>.dist` attribute.
 #     Default value:
 #         PydanticUndefined
+# Description:
+#     None
+# Required: False
+#     None
+# Examples:
+#     None
 feature_name: OpenStudioLandscapes-VERT
 
 
@@ -175,10 +238,17 @@ feature_name: OpenStudioLandscapes-VERT
 #
 # Type: <class 'pathlib.Path'>
 # Base Class:
+#     Required: False
 #     Description:
 #         The path to the `docker-compose.yml` file.
 #     Default value:
 #         {DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.yml
+# Description:
+#     The path to the `docker-compose.yml` file.
+# Required: False
+#     The path to the `docker-compose.yml` file.
+# Examples:
+#     None
 
 
 # =======================
@@ -186,7 +256,9 @@ feature_name: OpenStudioLandscapes-VERT
 # -----------------------
 #
 # Type: <class 'pathlib.Path'>
-# Sub Class Description:
+# Description:
+#     The path to the `docker-compose.yml` file.
+# Required: False
 #     The path to the `docker-compose.yml` file.
 # Examples:
 #     None
@@ -198,7 +270,9 @@ docker_compose_override: '{DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/
 # -------------------
 #
 # Type: <class 'int'>
-# Sub Class Description:
+# Description:
+#     The VERT container port.
+# Required: False
 #     The VERT container port.
 # Examples:
 #     None
@@ -210,7 +284,9 @@ vert_port_container: 80
 # --------------
 #
 # Type: <class 'int'>
-# Sub Class Description:
+# Description:
+#     The VERT host port.
+# Required: False
 #     The VERT host port.
 # Examples:
 #     None
@@ -222,7 +298,9 @@ vert_port_host: 4546
 # --------------
 #
 # Type: <class 'pydantic.networks.HttpUrl'>
-# Sub Class Description:
+# Description:
+#     None
+# Required: False
 #     None
 # Examples:
 #     None
@@ -234,7 +312,9 @@ repository_url: https://github.com/VERT-sh/VERT.git
 # -----------------
 #
 # Type: <enum 'Branches'>
-# Sub Class Description:
+# Description:
+#     None
+# Required: False
 #     None
 # Examples:
 #     ['main']
@@ -246,7 +326,9 @@ repository_branch: main
 # -----------------
 #
 # Type: <class 'str'>
-# Sub Class Description:
+# Description:
+#     None
+# Required: False
 #     None
 # Examples:
 #     None
@@ -258,7 +340,9 @@ repository_subdir: VERT
 # ------------------
 #
 # Type: <class 'str'>
-# Sub Class Description:
+# Description:
+#     None
+# Required: False
 #     None
 # Examples:
 #     None
@@ -400,4 +484,4 @@ Currently, the following Python interpreters are enabled for testing:
 
 ***
 
-Last changed: **2025-12-23 12:26:22 UTC**
+Last changed: **2025-12-23 12:48:43 UTC**
