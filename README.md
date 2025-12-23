@@ -57,24 +57,214 @@ A local config store location will be created if it doesn't exist, together with
 The following settings are available in `OpenStudioLandscapes-VERT` and are accessible throughout the [`OpenStudioLandscapes-VERT`](https://github.com/michimussato/OpenStudioLandscapes-VERT/tree/main/OpenStudioLandscapes/VERT/config/models.py) package.
 
 ```yaml
-# Base Information
-group_name: "OpenStudioLandscapes_VERT"
+# ===
+# env
+# ---
+#
+# Type: typing.Dict
+# Base Class:
+#     Description:
+#         None
+#     Default value:
+#         None
+
+
+# =============
+# config_engine
+# -------------
+#
+# Type: <class 'OpenStudioLandscapes.engine.config.models.ConfigEngine'>
+# Base Class:
+#     Description:
+#         None
+#     Default value:
+#         None
+
+
+# =============
+# config_parent
+# -------------
+#
+# Type: <class 'OpenStudioLandscapes.engine.config.models.FeatureBaseModel'>
+# Base Class:
+#     Description:
+#         None
+#     Default value:
+#         None
+
+
+# ============
+# distribution
+# ------------
+#
+# Type: <class 'importlib.metadata.Distribution'>
+# Base Class:
+#     Description:
+#         None
+#     Default value:
+#         None
+
+
+# ==========
+# group_name
+# ----------
+#
+# Type: <class 'str'>
+# Base Class:
+#     Description:
+#         None
+#     Default value:
+#         None
+group_name: OpenStudioLandscapes_VERT
+
+
+# ============
+# key_prefixes
+# ------------
+#
+# Type: typing.List[str]
+# Base Class:
+#     Description:
+#         None
+#     Default value:
+#         None
 key_prefixes:
-  - "OpenStudioLandscapes_VERT"
+- OpenStudioLandscapes_VERT
 
-#compose_scope: "default"
 
-#enabled: true
+# =======
+# enabled
+# -------
+#
+# Type: <class 'bool'>
+# Base Class:
+#     Description:
+#         Whether the Feature is enabled or not.
+#     Default value:
+#         True
 
-#docker_compose_override: "{DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.override.yml"
 
-#vert_port_container: 80
-#vert_port_host: 4546
+# =============
+# compose_scope
+# -------------
+#
+# Type: <class 'str'>
+# Base Class:
+#     Description:
+#         None
+#     Default value:
+#         default
 
-#repository_url: "https://github.com/VERT-sh/VERT.git"
-#repository_branch: "main"
-#repository_subdir: "VERT"
-#docker_compose_yml: "docker-compose.yml"
+
+# ============
+# feature_name
+# ------------
+#
+# Type: <class 'str'>
+# Base Class:
+#     Description:
+#         The name of the feature. It is derived from the `OpenStudioLandscapes.<Feature>.dist` attribute.
+#     Default value:
+#         PydanticUndefined
+feature_name: OpenStudioLandscapes-VERT
+
+
+# ==============
+# docker_compose
+# --------------
+#
+# Type: <class 'pathlib.Path'>
+# Base Class:
+#     Description:
+#         The path to the `docker-compose.yml` file.
+#     Default value:
+#         {DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.yml
+
+
+# =======================
+# docker_compose_override
+# -----------------------
+#
+# Type: <class 'pathlib.Path'>
+# Sub Class Description:
+#     The path to the `docker-compose.yml` file.
+# Examples:
+#     None
+docker_compose_override: '{DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.override.yml'
+
+
+# ===================
+# vert_port_container
+# -------------------
+#
+# Type: <class 'int'>
+# Sub Class Description:
+#     The VERT container port.
+# Examples:
+#     None
+vert_port_container: 80
+
+
+# ==============
+# vert_port_host
+# --------------
+#
+# Type: <class 'int'>
+# Sub Class Description:
+#     The VERT host port.
+# Examples:
+#     None
+vert_port_host: 4546
+
+
+# ==============
+# repository_url
+# --------------
+#
+# Type: <class 'pydantic.networks.HttpUrl'>
+# Sub Class Description:
+#     None
+# Examples:
+#     None
+repository_url: https://github.com/VERT-sh/VERT.git
+
+
+# =================
+# repository_branch
+# -----------------
+#
+# Type: <enum 'Branches'>
+# Sub Class Description:
+#     None
+# Examples:
+#     ['main']
+repository_branch: main
+
+
+# =================
+# repository_subdir
+# -----------------
+#
+# Type: <class 'str'>
+# Sub Class Description:
+#     None
+# Examples:
+#     None
+repository_subdir: VERT
+
+
+# ==================
+# docker_compose_yml
+# ------------------
+#
+# Type: <class 'str'>
+# Sub Class Description:
+#     None
+# Examples:
+#     None
+docker_compose_yml: docker-compose.yml
+
+
 
 ```
 
@@ -210,4 +400,4 @@ Currently, the following Python interpreters are enabled for testing:
 
 ***
 
-Last changed: **2025-12-19 21:11:39 UTC**
+Last changed: **2025-12-23 12:26:22 UTC**
