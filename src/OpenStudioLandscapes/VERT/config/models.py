@@ -1,5 +1,6 @@
 import enum
 import pathlib
+from typing import List
 
 from dagster import get_dagster_logger
 from pydantic import (
@@ -10,12 +11,12 @@ from pydantic import (
 
 LOGGER = get_dagster_logger(__name__)
 
+from OpenStudioLandscapes.engine.config.str_gen import get_config_str
 from OpenStudioLandscapes.engine.config.models import FeatureBaseModel
 
 from OpenStudioLandscapes.VERT import dist
 
 config_default = pathlib.Path(__file__).parent.joinpath("config_default.yml")
-CONFIG_STR = config_default.read_text()
 
 
 class Branches(enum.StrEnum):
@@ -24,9 +25,13 @@ class Branches(enum.StrEnum):
 
 class Config(FeatureBaseModel):
 
-    feature_name: str = dist.name
+    group_name: str = "OpenStudioLandscapes_VERT"
 
-    definitions: str = "OpenStudioLandscapes.VERT.definitions"
+    key_prefixes: List[str] = [
+        "OpenStudioLandscapes_VERT",
+    ]
+
+    feature_name: str = dist.name
 
     docker_compose_override: pathlib.Path = Field(
         default=pathlib.Path(
@@ -79,3 +84,8 @@ class Config(FeatureBaseModel):
             )
         )
         return ret
+
+
+CONFIG_STR = get_config_str(
+    Config=Config,
+)
