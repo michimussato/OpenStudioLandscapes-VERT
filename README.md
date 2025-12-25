@@ -144,11 +144,11 @@ The following settings are available in `OpenStudioLandscapes-VERT` and are base
 # Type: <class 'str'>
 # Base Class Info:
 #     Required:
-#         False
+#         True
 #     Description:
-#         None
+#         Dagster Group name. This will represent the group node name. See https://docs.dagster.io/api/dagster/assets for more information
 #     Default value:
-#         None
+#         PydanticUndefined
 # Description:
 #     None
 # Required:
@@ -165,11 +165,11 @@ group_name: OpenStudioLandscapes_VERT
 # Type: typing.List[str]
 # Base Class Info:
 #     Required:
-#         False
+#         True
 #     Description:
-#         None
+#         Dagster Asset key prefixes. This will be reflected in the nesting (directory structure) of the Asset. See https://docs.dagster.io/api/dagster/assets for more information
 #     Default value:
-#         None
+#         PydanticUndefined
 # Description:
 #     None
 # Required:
@@ -482,4 +482,4 @@ Currently, the following Python interpreters are enabled for testing:
 
 ***
 
-Last changed: **2025-12-23 22:40:12 UTC**
+Last changed: **2025-12-25 14:28:38 UTC**
