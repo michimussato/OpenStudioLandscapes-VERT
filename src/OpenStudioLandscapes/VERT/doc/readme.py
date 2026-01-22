@@ -19,23 +19,17 @@ def readme_feature(
 
     doc.add_paragraph(
         snakemd.Inline(
-            text=textwrap.dedent(
-                """\
+            text=textwrap.dedent("""\
                 Logo VERT\
-                """
-            ),
+                """),
             image="https://github.com/user-attachments/assets/bf441748-0ec5-4c8a-b3e5-11301ee3f0bd",
             link="https://vert.sh",
         ).__str__()
     )
 
-    doc.add_paragraph(
-        text=textwrap.dedent(
-            """\
+    doc.add_paragraph(text=textwrap.dedent("""\
             Official VERT-sh information here:\
-            """
-        )
-    )
+            """))
 
     doc.add_unordered_list(
         [
