@@ -2,17 +2,19 @@ project:
   description: VERT Feature for OpenStudioLandscapes
   name: OpenStudioLandscapes-VERT
   optional-dependencies:
+    optional-base:
+    - OpenStudioLandscapes @ git+https://github.com/michimussato/OpenStudioLandscapes.git
     dev:
-    - OpenStudioLandscapes-VERT[testing]
     - OpenStudioLandscapes-VERT[lint]
-    - OpenStudioLandscapes-VERT[nox]
     - OpenStudioLandscapes-VERT[sbom]
-    - OpenStudioLandscapes-VERT[coverage]
     - OpenStudioLandscapes-VERT[readme]
-    nox:
-    - OpenStudioLandscapes-VERT[testing]
+    lint:
+    - OpenStudioLandscapes-VERT[optional-base]
+    readme:
+    - OpenStudioLandscapes-VERT[optional-base]
     sbom:
     - OpenStudioLandscapes-VERT[graphviz]
+    - OpenStudioLandscapes-VERT[optional-base]
   urls:
     Homepage: https://github.com/michimussato/OpenStudioLandscapes-VERT
 tool:
