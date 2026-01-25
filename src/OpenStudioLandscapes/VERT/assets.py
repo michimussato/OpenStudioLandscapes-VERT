@@ -295,6 +295,7 @@ def compose(
                 # "/etc/localtime:/etc/localtime:ro",
                 # *_volume_relative,
                 *config_engine.global_bind_volumes,
+                *CONFIG.local_bind_volumes,
             }
         )
     }
@@ -317,6 +318,7 @@ def compose(
                 "domainname": config_engine.openstudiolandscapes__domain_lan,
                 "environment": {
                     **config_engine.global_environment_variables,
+                    **CONFIG.local_environment_variables,
                 },
                 **copy.deepcopy(ports_dict),
                 **copy.deepcopy(volumes_dict),
