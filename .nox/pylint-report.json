@@ -559,19 +559,6 @@
         "message-id": "C0116"
     },
     {
-        "type": "error",
-        "module": "OpenStudioLandscapes.VERT.config.models",
-        "obj": "Config.docker_compose_override_expanded",
-        "line": 73,
-        "column": 12,
-        "endLine": 73,
-        "endColumn": 51,
-        "path": "src/OpenStudioLandscapes/VERT/config/models.py",
-        "symbol": "no-member",
-        "message": "Instance of 'FieldInfo' has no 'expanduser' member",
-        "message-id": "E1101"
-    },
-    {
         "type": "convention",
         "module": "OpenStudioLandscapes.VERT.doc.readme",
         "obj": "",
