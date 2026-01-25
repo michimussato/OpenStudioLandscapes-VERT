@@ -290,10 +290,13 @@ def compose(
         )
 
     volumes_dict = {
-        "volumes": [
-            # "/etc/localtime:/etc/localtime:ro",
-            # *_volume_relative,
-        ]
+        "volumes": list(
+            {
+                # "/etc/localtime:/etc/localtime:ro",
+                # *_volume_relative,
+                *config_engine.global_bind_volumes,
+            }
+        )
     }
 
     service_name = "vert"
@@ -312,6 +315,9 @@ def compose(
                 "container_name": container_name,
                 "hostname": host_name,
                 "domainname": config_engine.openstudiolandscapes__domain_lan,
+                "environment": {
+                    **config_engine.global_environment_variables,
+                },
                 **copy.deepcopy(ports_dict),
                 **copy.deepcopy(volumes_dict),
                 **copy.deepcopy(network_dict),
