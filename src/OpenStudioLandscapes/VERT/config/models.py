@@ -70,7 +70,7 @@ class Config(FeatureBaseModel):
             raise KeyError("`env` is `None`.")
         LOGGER.debug(f"Expanding {self.docker_compose_override}...")
         ret = pathlib.Path(
-            self.docker_compose_override.expanduser()
+            self.docker_compose_override.expanduser()  # pylint: disable=E1101
             .as_posix()
             .format(
                 **{
