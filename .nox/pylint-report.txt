@@ -42,12 +42,11 @@ src/OpenStudioLandscapes/VERT/__init__.py:1:0: C0103: Module name "VERT" doesn't
 ************* Module OpenStudioLandscapes.VERT.config.models
 src/OpenStudioLandscapes/VERT/config/models.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 src/OpenStudioLandscapes/VERT/config/models.py:14:0: C0413: Import "from OpenStudioLandscapes.engine.config.models import FeatureBaseModel" should be placed at the top of the module (wrong-import-position)
-src/OpenStudioLandscapes/VERT/config/models.py:15:0: C0413: Import "from OpenStudioLandscapes.engine.config.str_gen import get_config_str" should be placed at the top of the module (wrong-import-position)
-src/OpenStudioLandscapes/VERT/config/models.py:17:0: C0413: Import "from OpenStudioLandscapes.VERT import constants, dist" should be placed at the top of the module (wrong-import-position)
-src/OpenStudioLandscapes/VERT/config/models.py:20:0: C0115: Missing class docstring (missing-class-docstring)
-src/OpenStudioLandscapes/VERT/config/models.py:21:4: C0103: Class constant name "main" doesn't conform to UPPER_CASE naming style (invalid-name)
-src/OpenStudioLandscapes/VERT/config/models.py:24:0: C0115: Missing class docstring (missing-class-docstring)
-src/OpenStudioLandscapes/VERT/config/models.py:67:4: C0116: Missing function or method docstring (missing-function-docstring)
+src/OpenStudioLandscapes/VERT/config/models.py:16:0: C0413: Import "from OpenStudioLandscapes.VERT import constants, dist" should be placed at the top of the module (wrong-import-position)
+src/OpenStudioLandscapes/VERT/config/models.py:19:0: C0115: Missing class docstring (missing-class-docstring)
+src/OpenStudioLandscapes/VERT/config/models.py:20:4: C0103: Class constant name "main" doesn't conform to UPPER_CASE naming style (invalid-name)
+src/OpenStudioLandscapes/VERT/config/models.py:23:0: C0115: Missing class docstring (missing-class-docstring)
+src/OpenStudioLandscapes/VERT/config/models.py:66:4: C0116: Missing function or method docstring (missing-function-docstring)
 ************* Module OpenStudioLandscapes.VERT.doc.readme
 src/OpenStudioLandscapes/VERT/doc/readme.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 src/OpenStudioLandscapes/VERT/doc/readme.py:6:0: C0116: Missing function or method docstring (missing-function-docstring)
@@ -66,5 +65,5 @@ src/OpenStudioLandscapes/VERT/doc/readme.py:1:0: R0801: Similar lines in 2 files
                 Logo VERT\ (duplicate-code)
 
 ------------------------------------------------------------------
-Your code has been rated at 7.34/10 (previous run: 7.27/10, +0.08)
+Your code has been rated at 7.39/10 (previous run: 7.31/10, +0.08)
 
