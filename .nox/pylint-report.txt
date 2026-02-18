@@ -17,8 +17,8 @@ src/OpenStudioLandscapes/VERT/assets.py:153:4: C0103: Argument name "CONFIG" doe
 src/OpenStudioLandscapes/VERT/assets.py:176:28: C0209: Formatting a regular string which could be an f-string (consider-using-f-string)
 src/OpenStudioLandscapes/VERT/assets.py:211:4: C0103: Argument name "CONFIG" doesn't conform to snake_case naming style (invalid-name)
 src/OpenStudioLandscapes/VERT/assets.py:207:0: R0914: Too many local variables (31/15) (too-many-locals)
-src/OpenStudioLandscapes/VERT/assets.py:344:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
-src/OpenStudioLandscapes/VERT/assets.py:354:4: C0103: Variable name "DOCKER_COMPOSE" doesn't conform to snake_case naming style (invalid-name)
+src/OpenStudioLandscapes/VERT/assets.py:345:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+src/OpenStudioLandscapes/VERT/assets.py:355:4: C0103: Variable name "DOCKER_COMPOSE" doesn't conform to snake_case naming style (invalid-name)
 src/OpenStudioLandscapes/VERT/assets.py:20:0: W0614: Unused import(s) deep_sorted and YAMLObject from wildcard import of docker_compose_graph.utils (unused-wildcard-import)
 src/OpenStudioLandscapes/VERT/assets.py:40:0: W0614: Unused import(s) LOGGER, DOCKER_PROGRESS, GROUP_BASE_ENV, KEY_BASE_ENV, ASSET_HEADER_BASE_ENV, GROUP_BASE, KEY_BASE, GROUP_LANDSCAPE_MAP, KEY_LANDSCAPE_MAP, ASSET_HEADER_LANDSCAPE_MAP, GROUP_DISTRIBUTABLE, KEY_DISTRIBUTABLE, ASSET_HEADER_DISTRIBUTABLE, get_dagster_logger, DAGSTER_DEFAULT_OUTPUT and FeatureBaseModel from wildcard import of OpenStudioLandscapes.engine.constants (unused-wildcard-import)
 src/OpenStudioLandscapes/VERT/assets.py:41:0: W0614: Unused import(s) GroupIn, OpenStudioLandscapesConfig, FeatureVolumeType, ComposeCmdExclusion, DockerComposeNetworkMode, DockerComposeRestartPolicy and DockerComposeDependsOnPolicy from wildcard import of OpenStudioLandscapes.engine.enums (unused-wildcard-import)
@@ -65,5 +65,5 @@ src/OpenStudioLandscapes/VERT/doc/readme.py:1:0: R0801: Similar lines in 2 files
                 Logo VERT\ (duplicate-code)
 
 ------------------------------------------------------------------
-Your code has been rated at 7.39/10 (previous run: 7.31/10, +0.08)
+Your code has been rated at 7.39/10 (previous run: 7.28/10, +0.11)
 
