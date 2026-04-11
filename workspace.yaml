@@ -2,5 +2,5 @@
 
 load_from:
   - python_module:
-      module_name: "OpenStudioLandscapes.VERT.definitions"
+      module_name: "OpenStudioLandscapes.VERT._definitions_with_upstream_specs"
       location_name: "OpenStudioLandscapes-VERT"
