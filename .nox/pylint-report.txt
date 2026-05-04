@@ -43,12 +43,14 @@ src/OpenStudioLandscapes/VERT/__init__.py:1:0: C0114: Missing module docstring (
 src/OpenStudioLandscapes/VERT/__init__.py:1:0: C0103: Module name "VERT" doesn't conform to snake_case naming style (invalid-name)
 ************* Module OpenStudioLandscapes.VERT.config.models
 src/OpenStudioLandscapes/VERT/config/models.py:1:0: C0114: Missing module docstring (missing-module-docstring)
-src/OpenStudioLandscapes/VERT/config/models.py:14:0: C0413: Import "from OpenStudioLandscapes.engine.config.models import FeatureBaseModel" should be placed at the top of the module (wrong-import-position)
-src/OpenStudioLandscapes/VERT/config/models.py:16:0: C0413: Import "from OpenStudioLandscapes.VERT import constants, dist" should be placed at the top of the module (wrong-import-position)
-src/OpenStudioLandscapes/VERT/config/models.py:19:0: C0115: Missing class docstring (missing-class-docstring)
-src/OpenStudioLandscapes/VERT/config/models.py:20:4: C0103: Class constant name "main" doesn't conform to UPPER_CASE naming style (invalid-name)
-src/OpenStudioLandscapes/VERT/config/models.py:23:0: C0115: Missing class docstring (missing-class-docstring)
-src/OpenStudioLandscapes/VERT/config/models.py:66:4: C0116: Missing function or method docstring (missing-function-docstring)
+src/OpenStudioLandscapes/VERT/config/models.py:6:0: E0401: Unable to import 'OpenStudioLandscapes.engine.logging.loggers' (import-error)
+src/OpenStudioLandscapes/VERT/config/models.py:6:0: E0611: No name 'logging' in module 'OpenStudioLandscapes.engine' (no-name-in-module)
+src/OpenStudioLandscapes/VERT/config/models.py:16:0: C0115: Missing class docstring (missing-class-docstring)
+src/OpenStudioLandscapes/VERT/config/models.py:17:4: C0103: Class constant name "main" doesn't conform to UPPER_CASE naming style (invalid-name)
+src/OpenStudioLandscapes/VERT/config/models.py:20:0: C0115: Missing class docstring (missing-class-docstring)
+src/OpenStudioLandscapes/VERT/config/models.py:63:4: C0116: Missing function or method docstring (missing-function-docstring)
+src/OpenStudioLandscapes/VERT/config/models.py:7:0: C0411: third party import "pydantic.Field" should be placed before first party imports "OpenStudioLandscapes.engine.config.models.FeatureBaseModel", "OpenStudioLandscapes.engine.logging.loggers.FEATURE_LOGGER"  (wrong-import-order)
+src/OpenStudioLandscapes/VERT/config/models.py:13:0: C0412: Imports from package OpenStudioLandscapes are not grouped (ungrouped-imports)
 ************* Module OpenStudioLandscapes.VERT.doc.readme
 src/OpenStudioLandscapes/VERT/doc/readme.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 src/OpenStudioLandscapes/VERT/doc/readme.py:6:0: C0116: Missing function or method docstring (missing-function-docstring)
@@ -67,5 +69,5 @@ src/OpenStudioLandscapes/VERT/doc/readme.py:1:0: R0801: Similar lines in 2 files
                 Logo VERT\ (duplicate-code)
 
 ------------------------------------------------------------------
-Your code has been rated at 7.42/10 (previous run: 7.31/10, +0.10)
+Your code has been rated at 6.90/10 (previous run: 6.72/10, +0.18)
 
