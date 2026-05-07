@@ -81,326 +81,105 @@ The following settings are available in `OpenStudioLandscapes-VERT` and are base
 
 
 ```yaml
-# ===
-# env
-# ---
-#
-# Type: typing.Dict
-# Base Class Info:
-#     Required:
-#         False
-#     Description:
-#         None
-#     Default value:
-#         PydanticUndefined
-# Description:
-#     None
-# Required:
-#     False
-# Examples:
-#     None
+$defs:
+  Branches:
+    enum:
+    - main
+    title: Branches
+    type: string
+properties:
+  compose_scope:
+    default: default
+    examples:
+    - default
+    - license_server
+    - worker
+    title: Compose Scope
+    type: string
+  docker_compose:
+    default: '{DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.yml'
+    description: The path to the `docker-compose.yml` file.
+    format: path
+    title: Docker Compose
+    type: string
+  docker_compose_override:
+    default: '{DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.override.yml'
+    description: The path to the `docker-compose.yml` file.
+    format: path
+    title: Docker Compose Override
+    type: string
+  docker_compose_yml:
+    default: docker-compose.yml
+    title: Docker Compose Yml
+    type: string
+  enabled:
+    default: true
+    description: Whether the Feature is enabled or not.
+    title: Enabled
+    type: boolean
+  env:
+    additionalProperties: true
+    title: Env
+    type: object
+  feature_name:
+    default: OpenStudioLandscapes-VERT
+    title: Feature Name
+    type: string
+  group_name:
+    default: OpenStudioLandscapes_VERT
+    title: Group Name
+    type: string
+  key_prefixes:
+    default:
+    - OpenStudioLandscapes_VERT
+    items:
+      type: string
+    title: Key Prefixes
+    type: array
+  local_bind_volumes:
+    description: Here you can define Feature specific, arbitrary, absolute bind volume
+      mappings.
+    items:
+      type: string
+    title: Local Bind Volumes
+    type: array
+  local_environment_variables:
+    additionalProperties:
+      type: string
+    description: Here you can define Feature specific, arbitrary environment variables.
+    title: Local Environment Variables
+    type: object
+  repository_branch:
+    $ref: '#/$defs/Branches'
+    default: main
+    examples:
+    - main
+  repository_subdir:
+    default: VERT
+    title: Repository Subdir
+    type: string
+  repository_url:
+    default: https://github.com/VERT-sh/VERT.git
+    format: uri
+    maxLength: 2083
+    minLength: 1
+    title: Repository Url
+    type: string
+  vert_port_container:
+    default: 80
+    description: The VERT container port.
+    exclusiveMinimum: 0
+    title: Vert Port Container
+    type: integer
+  vert_port_host:
+    default: 4546
+    description: The VERT host port.
+    exclusiveMinimum: 0
+    title: Vert Port Host
+    type: integer
+title: Config
+type: object
 
-
-# ==================
-# local_bind_volumes
-# ------------------
-#
-# Type: typing.List[str]
-# Base Class Info:
-#     Required:
-#         False
-#     Description:
-#         Here you can define Feature specific, arbitrary, absolute bind volume mappings.
-#     Default value:
-#         PydanticUndefined
-# Description:
-#     Here you can define Feature specific, arbitrary, absolute bind volume mappings.
-# Required:
-#     False
-# Examples:
-#     None
-
-
-# ===========================
-# local_environment_variables
-# ---------------------------
-#
-# Type: typing.Dict[str, str]
-# Base Class Info:
-#     Required:
-#         False
-#     Description:
-#         Here you can define Feature specific, arbitrary environment variables.
-#     Default value:
-#         PydanticUndefined
-# Description:
-#     Here you can define Feature specific, arbitrary environment variables.
-# Required:
-#     False
-# Examples:
-#     None
-
-
-# =============
-# config_engine
-# -------------
-#
-# Type: <class 'OpenStudioLandscapes.engine.config.models.ConfigEngine'>
-# Base Class Info:
-#     Required:
-#         False
-#     Description:
-#         None
-#     Default value:
-#         None
-# Description:
-#     None
-# Required:
-#     False
-# Examples:
-#     None
-
-
-# ============
-# distribution
-# ------------
-#
-# Type: <class 'importlib.metadata.Distribution'>
-# Base Class Info:
-#     Required:
-#         False
-#     Description:
-#         None
-#     Default value:
-#         None
-# Description:
-#     None
-# Required:
-#     False
-# Examples:
-#     None
-
-
-# ==========
-# group_name
-# ----------
-#
-# Type: <class 'str'>
-# Base Class Info:
-#     Required:
-#         True
-#     Description:
-#         Dagster Group name. This will represent the group node name. See https://docs.dagster.io/api/dagster/assets for more information
-#     Default value:
-#         PydanticUndefined
-# Description:
-#     None
-# Required:
-#     False
-# Examples:
-#     None
-group_name: OpenStudioLandscapes_VERT
-
-
-# ============
-# key_prefixes
-# ------------
-#
-# Type: typing.List[str]
-# Base Class Info:
-#     Required:
-#         True
-#     Description:
-#         Dagster Asset key prefixes. This will be reflected in the nesting (directory structure) of the Asset. See https://docs.dagster.io/api/dagster/assets for more information
-#     Default value:
-#         PydanticUndefined
-# Description:
-#     None
-# Required:
-#     False
-# Examples:
-#     None
-key_prefixes:
-- OpenStudioLandscapes_VERT
-
-
-# =======
-# enabled
-# -------
-#
-# Type: <class 'bool'>
-# Base Class Info:
-#     Required:
-#         False
-#     Description:
-#         Whether the Feature is enabled or not.
-#     Default value:
-#         True
-# Description:
-#     Whether the Feature is enabled or not.
-# Required:
-#     False
-# Examples:
-#     None
-
-
-# =============
-# compose_scope
-# -------------
-#
-# Type: <class 'str'>
-# Base Class Info:
-#     Required:
-#         False
-#     Description:
-#         None
-#     Default value:
-#         default
-# Description:
-#     None
-# Required:
-#     False
-# Examples:
-#     ['default', 'license_server', 'worker']
-
-
-# ============
-# feature_name
-# ------------
-#
-# Type: <class 'str'>
-# Base Class Info:
-#     Required:
-#         True
-#     Description:
-#         The name of the feature. It is derived from the `OpenStudioLandscapes.<Feature>.dist` attribute.
-#     Default value:
-#         PydanticUndefined
-# Description:
-#     None
-# Required:
-#     False
-# Examples:
-#     None
-feature_name: OpenStudioLandscapes-VERT
-
-
-# ==============
-# docker_compose
-# --------------
-#
-# Type: <class 'pathlib.Path'>
-# Base Class Info:
-#     Required:
-#         False
-#     Description:
-#         The path to the `docker-compose.yml` file.
-#     Default value:
-#         {DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.yml
-# Description:
-#     The path to the `docker-compose.yml` file.
-# Required:
-#     False
-# Examples:
-#     None
-
-
-# =======================
-# docker_compose_override
-# -----------------------
-#
-# Type: <class 'pathlib.Path'>
-# Description:
-#     The path to the `docker-compose.yml` file.
-# Required:
-#     False
-# Examples:
-#     None
-docker_compose_override: '{DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.override.yml'
-
-
-# ===================
-# vert_port_container
-# -------------------
-#
-# Type: <class 'int'>
-# Description:
-#     The VERT container port.
-# Required:
-#     False
-# Examples:
-#     None
-vert_port_container: 80
-
-
-# ==============
-# vert_port_host
-# --------------
-#
-# Type: <class 'int'>
-# Description:
-#     The VERT host port.
-# Required:
-#     False
-# Examples:
-#     None
-vert_port_host: 4546
-
-
-# ==============
-# repository_url
-# --------------
-#
-# Type: <class 'pydantic.networks.HttpUrl'>
-# Description:
-#     None
-# Required:
-#     False
-# Examples:
-#     None
-repository_url: https://github.com/VERT-sh/VERT.git
-
-
-# =================
-# repository_branch
-# -----------------
-#
-# Type: <enum 'Branches'>
-# Description:
-#     None
-# Required:
-#     False
-# Examples:
-#     ['main']
-repository_branch: main
-
-
-# =================
-# repository_subdir
-# -----------------
-#
-# Type: <class 'str'>
-# Description:
-#     None
-# Required:
-#     False
-# Examples:
-#     None
-repository_subdir: VERT
-
-
-# ==================
-# docker_compose_yml
-# ------------------
-#
-# Type: <class 'str'>
-# Description:
-#     None
-# Required:
-#     False
-# Examples:
-#     None
-docker_compose_yml: docker-compose.yml
 ```
 
 </details>
@@ -462,4 +241,4 @@ To follow up on the previous LinkedIn publications, visit:
 
 ***
 
-Last changed: **2026-04-28 14:44:05 UTC**
+Last changed: **2026-05-07 19:25:18 UTC**

@@ -10,9 +10,9 @@ from pydantic import (
 )
 
 from OpenStudioLandscapes.VERT import (
-    dist,
     LOGGER,
     constants,
+    dist,
 )
 
 
