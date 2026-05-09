@@ -11,9 +11,6 @@ src/OpenStudioLandscapes/VERT/assets.py:355:9: W1514: Using open without explici
 ************* Module OpenStudioLandscapes.VERT.definitions
 src/OpenStudioLandscapes/VERT/definitions.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 src/OpenStudioLandscapes/VERT/definitions.py:12:0: W1203: Use lazy % formatting in logging functions (logging-fstring-interpolation)
-************* Module OpenStudioLandscapes.VERT.constants
-src/OpenStudioLandscapes/VERT/constants.py:7:1: W0511: Todo (fixme)
-src/OpenStudioLandscapes/VERT/constants.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 ************* Module OpenStudioLandscapes.VERT._definitions_with_upstream_specs
 src/OpenStudioLandscapes/VERT/_definitions_with_upstream_specs.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 ************* Module OpenStudioLandscapes.VERT.__init__
@@ -21,6 +18,7 @@ src/OpenStudioLandscapes/VERT/__init__.py:15:5: W0511: TODO: Import directly (no
 ************* Module OpenStudioLandscapes.VERT
 src/OpenStudioLandscapes/VERT/__init__.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 src/OpenStudioLandscapes/VERT/__init__.py:1:0: C0103: Module name "VERT" doesn't conform to snake_case naming style (invalid-name)
+src/OpenStudioLandscapes/VERT/__init__.py:39:4: C0103: Constant name "fill" doesn't conform to UPPER_CASE naming style (invalid-name)
 ************* Module OpenStudioLandscapes.VERT.config.models
 src/OpenStudioLandscapes/VERT/config/models.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 src/OpenStudioLandscapes/VERT/config/models.py:19:0: C0115: Missing class docstring (missing-class-docstring)
@@ -37,5 +35,5 @@ src/OpenStudioLandscapes/VERT/doc/readme.py:6:0: C0116: Missing function or meth
 src/OpenStudioLandscapes/VERT/doc/readme.py:21:8: C2801: Unnecessarily calls dunder method __str__. Use str built-in function. (unnecessary-dunder-call)
 
 ------------------------------------------------------------------
-Your code has been rated at 8.10/10 (previous run: 7.89/10, +0.22)
+Your code has been rated at 8.15/10 (previous run: 7.93/10, +0.22)
 

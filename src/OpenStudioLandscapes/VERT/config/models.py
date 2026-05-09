@@ -10,9 +10,9 @@ from pydantic import (
 )
 
 from OpenStudioLandscapes.VERT import (
+    ASSET_HEADER,
     LOGGER,
     dist,
-    ASSET_HEADER,
 )
 
 
