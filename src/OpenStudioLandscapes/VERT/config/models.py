@@ -2,18 +2,18 @@ import enum
 import pathlib
 from typing import List
 
-from dagster import get_dagster_logger
+from OpenStudioLandscapes.engine.config.models import FeatureBaseModel
 from pydantic import (
     Field,
     HttpUrl,
     PositiveInt,
 )
 
-LOGGER = get_dagster_logger(__name__)
-
-from OpenStudioLandscapes.engine.config.models import FeatureBaseModel
-
-from OpenStudioLandscapes.VERT import constants, dist
+from OpenStudioLandscapes.VERT import (
+    ASSET_HEADER,
+    LOGGER,
+    dist,
+)
 
 
 class Branches(enum.StrEnum):
@@ -24,9 +24,9 @@ class Config(FeatureBaseModel):
 
     feature_name: str = dist.name
 
-    group_name: str = constants.ASSET_HEADER["group_name"]
+    group_name: str = ASSET_HEADER["group_name"]
 
-    key_prefixes: List[str] = constants.ASSET_HEADER["key_prefix"]
+    key_prefixes: List[str] = ASSET_HEADER["key_prefix"]
 
     docker_compose_override: pathlib.Path = Field(
         default=pathlib.Path(
@@ -81,4 +81,11 @@ class Config(FeatureBaseModel):
         return ret
 
 
-CONFIG_STR = Config.get_docs()
+if __name__ == "__main__":
+    CONFIG_STR = Config.get_docs()
+else:
+    import yaml
+
+    CONFIG_STR = yaml.dump(
+        Config.model_json_schema(mode="serialization"),
+    )

@@ -1,69 +1,39 @@
 ************* Module OpenStudioLandscapes.VERT.assets
-src/OpenStudioLandscapes/VERT/assets.py:274:0: C0301: Line too long (116/100) (line-too-long)
-src/OpenStudioLandscapes/VERT/assets.py:191:1: W0511: Todo: (fixme)
+src/OpenStudioLandscapes/VERT/assets.py:201:1: W0511: Todo: (fixme)
 src/OpenStudioLandscapes/VERT/assets.py:1:0: C0114: Missing module docstring (missing-module-docstring)
-src/OpenStudioLandscapes/VERT/assets.py:20:0: W0401: Wildcard import docker_compose_graph.utils (wildcard-import)
-src/OpenStudioLandscapes/VERT/assets.py:21:0: W0401: Wildcard import docker_compose_graph.yaml_tags.overrides (wildcard-import)
-src/OpenStudioLandscapes/VERT/assets.py:40:0: W0401: Wildcard import OpenStudioLandscapes.engine.constants (wildcard-import)
-src/OpenStudioLandscapes/VERT/assets.py:41:0: W0401: Wildcard import OpenStudioLandscapes.engine.enums (wildcard-import)
-src/OpenStudioLandscapes/VERT/assets.py:42:0: W0401: Wildcard import OpenStudioLandscapes.engine.utils (wildcard-import)
-src/OpenStudioLandscapes/VERT/assets.py:43:0: W0401: Wildcard import OpenStudioLandscapes.engine.utils.docker.compose_dicts (wildcard-import)
-src/OpenStudioLandscapes/VERT/assets.py:47:0: W0401: Wildcard import OpenStudioLandscapes.VERT.constants (wildcard-import)
-src/OpenStudioLandscapes/VERT/assets.py:112:0: C0116: Missing function or method docstring (missing-function-docstring)
-src/OpenStudioLandscapes/VERT/assets.py:114:4: C0103: Argument name "CONFIG" doesn't conform to snake_case naming style (invalid-name)
-src/OpenStudioLandscapes/VERT/assets.py:114:4: W0621: Redefining name 'CONFIG' from outer scope (line 60) (redefined-outer-name)
-src/OpenStudioLandscapes/VERT/assets.py:151:0: C0116: Missing function or method docstring (missing-function-docstring)
-src/OpenStudioLandscapes/VERT/assets.py:153:4: C0103: Argument name "CONFIG" doesn't conform to snake_case naming style (invalid-name)
-src/OpenStudioLandscapes/VERT/assets.py:176:28: C0209: Formatting a regular string which could be an f-string (consider-using-f-string)
-src/OpenStudioLandscapes/VERT/assets.py:211:4: C0103: Argument name "CONFIG" doesn't conform to snake_case naming style (invalid-name)
-src/OpenStudioLandscapes/VERT/assets.py:207:0: R0914: Too many local variables (31/15) (too-many-locals)
-src/OpenStudioLandscapes/VERT/assets.py:345:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
-src/OpenStudioLandscapes/VERT/assets.py:355:4: C0103: Variable name "DOCKER_COMPOSE" doesn't conform to snake_case naming style (invalid-name)
-src/OpenStudioLandscapes/VERT/assets.py:20:0: W0614: Unused import(s) deep_sorted and YAMLObject from wildcard import of docker_compose_graph.utils (unused-wildcard-import)
-src/OpenStudioLandscapes/VERT/assets.py:40:0: W0614: Unused import(s) LOGGER, DOCKER_PROGRESS, GROUP_BASE_ENV, KEY_BASE_ENV, ASSET_HEADER_BASE_ENV, GROUP_BASE, KEY_BASE, GROUP_VFX_PLATFORM, KEY_VFX_PLATFORM, ASSET_HEADER_VFX_PLATFORM, GROUP_LANDSCAPE_MAP, KEY_LANDSCAPE_MAP, ASSET_HEADER_LANDSCAPE_MAP, GROUP_DISTRIBUTABLE, KEY_DISTRIBUTABLE, ASSET_HEADER_DISTRIBUTABLE, get_dagster_logger, DAGSTER_DEFAULT_OUTPUT and FeatureBaseModel from wildcard import of OpenStudioLandscapes.engine.constants (unused-wildcard-import)
-src/OpenStudioLandscapes/VERT/assets.py:41:0: W0614: Unused import(s) GroupIn, OpenStudioLandscapesConfig, FeatureVolumeType, ComposeCmdExclusion, DockerComposeNetworkMode, DockerComposeRestartPolicy and DockerComposeDependsOnPolicy from wildcard import of OpenStudioLandscapes.engine.enums (unused-wildcard-import)
-src/OpenStudioLandscapes/VERT/assets.py:42:0: W0614: Unused import(s) datetime, json, os, shlex, time, requests, discovery, cmd_list_to_str, get_pip_install_str, get_apt_install_str, get_copy_str, get_wget_str, get_git_root, get_configs_root, get_data_root, get_bin_root, get_image_name, parse_docker_image_path, get_compose_scope, get_feature_config, expand_dict_vars, metadatavalues_from_dict, get_bool_env, get_str_env, get_all_compose_scopes, get_dynamic_ins, get_image_metadata, create_image, get_networks_dict, download_file, get_docker_run_cmd, Any, MutableMapping, Tuple, OpExecutionContext, DockerConfigModel, ComposeScopeException, OpenStudioLandscapesException, shutil, OpenStudioLandscapesDockerException, docker_build_cmd, docker_push_cmd, docker_do and submit_cmds from wildcard import of OpenStudioLandscapes.engine.utils (unused-wildcard-import)
-src/OpenStudioLandscapes/VERT/assets.py:43:0: W0614: Unused import(s) DockerComposeServiceDefinition, DockerComposeNetworkDefinition, Optional, Required and TypedDict from wildcard import of OpenStudioLandscapes.engine.utils.docker.compose_dicts (unused-wildcard-import)
-src/OpenStudioLandscapes/VERT/assets.py:47:0: W0614: Unused import(s) GROUP and KEY from wildcard import of OpenStudioLandscapes.VERT.constants (unused-wildcard-import)
+src/OpenStudioLandscapes/VERT/assets.py:122:0: C0116: Missing function or method docstring (missing-function-docstring)
+src/OpenStudioLandscapes/VERT/assets.py:124:4: W0621: Redefining name 'CONFIG' from outer scope (line 70) (redefined-outer-name)
+src/OpenStudioLandscapes/VERT/assets.py:161:0: C0116: Missing function or method docstring (missing-function-docstring)
+src/OpenStudioLandscapes/VERT/assets.py:186:28: C0209: Formatting a regular string which could be an f-string (consider-using-f-string)
+src/OpenStudioLandscapes/VERT/assets.py:217:0: E0102: function already defined line 28 (function-redefined)
+src/OpenStudioLandscapes/VERT/assets.py:217:0: R0914: Too many local variables (31/15) (too-many-locals)
+src/OpenStudioLandscapes/VERT/assets.py:355:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
 ************* Module OpenStudioLandscapes.VERT.definitions
 src/OpenStudioLandscapes/VERT/definitions.py:1:0: C0114: Missing module docstring (missing-module-docstring)
-************* Module OpenStudioLandscapes.VERT.readme_feature
-src/OpenStudioLandscapes/VERT/readme_feature.py:1:0: C0114: Missing module docstring (missing-module-docstring)
-src/OpenStudioLandscapes/VERT/readme_feature.py:6:0: C0116: Missing function or method docstring (missing-function-docstring)
-src/OpenStudioLandscapes/VERT/readme_feature.py:18:8: C2801: Unnecessarily calls dunder method __str__. Use str built-in function. (unnecessary-dunder-call)
-************* Module OpenStudioLandscapes.VERT.constants
-src/OpenStudioLandscapes/VERT/constants.py:7:1: W0511: Todo (fixme)
-src/OpenStudioLandscapes/VERT/constants.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+src/OpenStudioLandscapes/VERT/definitions.py:12:0: W1203: Use lazy % formatting in logging functions (logging-fstring-interpolation)
+************* Module OpenStudioLandscapes.VERT._definitions_with_upstream_specs
+src/OpenStudioLandscapes/VERT/_definitions_with_upstream_specs.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 ************* Module OpenStudioLandscapes.VERT.__init__
-src/OpenStudioLandscapes/VERT/__init__.py:6:5: W0511: TODO: Import directly (no need for conditional) when `python_requires = >= 3.8` (fixme)
+src/OpenStudioLandscapes/VERT/__init__.py:15:5: W0511: TODO: Import directly (no need for conditional) when `python_requires = >= 3.8` (fixme)
 ************* Module OpenStudioLandscapes.VERT
 src/OpenStudioLandscapes/VERT/__init__.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 src/OpenStudioLandscapes/VERT/__init__.py:1:0: C0103: Module name "VERT" doesn't conform to snake_case naming style (invalid-name)
+src/OpenStudioLandscapes/VERT/__init__.py:39:4: C0103: Constant name "fill" doesn't conform to UPPER_CASE naming style (invalid-name)
 ************* Module OpenStudioLandscapes.VERT.config.models
 src/OpenStudioLandscapes/VERT/config/models.py:1:0: C0114: Missing module docstring (missing-module-docstring)
-src/OpenStudioLandscapes/VERT/config/models.py:14:0: C0413: Import "from OpenStudioLandscapes.engine.config.models import FeatureBaseModel" should be placed at the top of the module (wrong-import-position)
-src/OpenStudioLandscapes/VERT/config/models.py:16:0: C0413: Import "from OpenStudioLandscapes.VERT import constants, dist" should be placed at the top of the module (wrong-import-position)
 src/OpenStudioLandscapes/VERT/config/models.py:19:0: C0115: Missing class docstring (missing-class-docstring)
 src/OpenStudioLandscapes/VERT/config/models.py:20:4: C0103: Class constant name "main" doesn't conform to UPPER_CASE naming style (invalid-name)
 src/OpenStudioLandscapes/VERT/config/models.py:23:0: C0115: Missing class docstring (missing-class-docstring)
 src/OpenStudioLandscapes/VERT/config/models.py:66:4: C0116: Missing function or method docstring (missing-function-docstring)
+src/OpenStudioLandscapes/VERT/config/models.py:67:8: W1203: Use lazy % formatting in logging functions (logging-fstring-interpolation)
+src/OpenStudioLandscapes/VERT/config/models.py:70:8: W1203: Use lazy % formatting in logging functions (logging-fstring-interpolation)
+src/OpenStudioLandscapes/VERT/config/models.py:6:0: C0411: third party import "pydantic.Field" should be placed before first party import "OpenStudioLandscapes.engine.config.models.FeatureBaseModel"  (wrong-import-order)
+src/OpenStudioLandscapes/VERT/config/models.py:12:0: C0412: Imports from package OpenStudioLandscapes are not grouped (ungrouped-imports)
 ************* Module OpenStudioLandscapes.VERT.doc.readme
 src/OpenStudioLandscapes/VERT/doc/readme.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 src/OpenStudioLandscapes/VERT/doc/readme.py:6:0: C0116: Missing function or method docstring (missing-function-docstring)
 src/OpenStudioLandscapes/VERT/doc/readme.py:21:8: C2801: Unnecessarily calls dunder method __str__. Use str built-in function. (unnecessary-dunder-call)
-src/OpenStudioLandscapes/VERT/doc/readme.py:1:0: R0801: Similar lines in 2 files
-==OpenStudioLandscapes.VERT.doc.readme:[14:23]
-==OpenStudioLandscapes.VERT.readme_feature:[11:20]
-        level=1,
-    )
-
-    # Logo
-
-    doc.add_paragraph(
-        snakemd.Inline(
-            text=textwrap.dedent("""\
-                Logo VERT\ (duplicate-code)
 
 ------------------------------------------------------------------
-Your code has been rated at 7.39/10 (previous run: 7.28/10, +0.11)
+Your code has been rated at 8.15/10 (previous run: 7.93/10, +0.22)
 

@@ -4,14 +4,20 @@ from dagster import (
 )
 
 import OpenStudioLandscapes.VERT.assets
+from OpenStudioLandscapes.VERT import (
+    LOGGER,
+    dist,
+)
 
-assets = load_assets_from_modules(
+LOGGER.info(f"Loading {dist.name} assets...")
+
+assets_base = load_assets_from_modules(
     modules=[OpenStudioLandscapes.VERT.assets],
 )
 
 
 defs = Definitions(
     assets=[
-        *assets,
+        *assets_base,
     ],
 )
