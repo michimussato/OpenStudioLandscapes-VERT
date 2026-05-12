@@ -81,104 +81,95 @@ The following settings are available in `OpenStudioLandscapes-VERT` and are base
 
 
 ```yaml
-$defs:
-  Branches:
-    enum:
-    - main
-    title: Branches
+compose_scope:
+  default: default
+  examples:
+  - default
+  - license_server
+  - worker
+  title: Compose Scope
+  type: string
+docker_compose:
+  default: '{DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.yml'
+  description: The path to the `docker-compose.yml` file.
+  format: path
+  title: Docker Compose
+  type: string
+docker_compose_override:
+  default: '{DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.override.yml'
+  description: The path to the `docker-compose.yml` file.
+  format: path
+  title: Docker Compose Override
+  type: string
+docker_compose_yml:
+  default: docker-compose.yml
+  title: Docker Compose Yml
+  type: string
+enabled:
+  default: true
+  description: Whether the Feature is enabled or not.
+  title: Enabled
+  type: boolean
+env:
+  additionalProperties: true
+  title: Env
+  type: object
+feature_name:
+  default: OpenStudioLandscapes-VERT
+  title: Feature Name
+  type: string
+group_name:
+  default: OpenStudioLandscapes_VERT
+  title: Group Name
+  type: string
+key_prefixes:
+  default:
+  - OpenStudioLandscapes_VERT
+  items:
     type: string
-properties:
-  compose_scope:
-    default: default
-    examples:
-    - default
-    - license_server
-    - worker
-    title: Compose Scope
+  title: Key Prefixes
+  type: array
+local_bind_volumes:
+  description: Here you can define Feature specific, arbitrary, absolute bind volume
+    mappings.
+  items:
     type: string
-  docker_compose:
-    default: '{DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.yml'
-    description: The path to the `docker-compose.yml` file.
-    format: path
-    title: Docker Compose
+  title: Local Bind Volumes
+  type: array
+local_environment_variables:
+  additionalProperties:
     type: string
-  docker_compose_override:
-    default: '{DOT_LANDSCAPES}/{LANDSCAPE}/{FEATURE}/docker_compose/docker-compose.override.yml'
-    description: The path to the `docker-compose.yml` file.
-    format: path
-    title: Docker Compose Override
-    type: string
-  docker_compose_yml:
-    default: docker-compose.yml
-    title: Docker Compose Yml
-    type: string
-  enabled:
-    default: true
-    description: Whether the Feature is enabled or not.
-    title: Enabled
-    type: boolean
-  env:
-    additionalProperties: true
-    title: Env
-    type: object
-  feature_name:
-    default: OpenStudioLandscapes-VERT
-    title: Feature Name
-    type: string
-  group_name:
-    default: OpenStudioLandscapes_VERT
-    title: Group Name
-    type: string
-  key_prefixes:
-    default:
-    - OpenStudioLandscapes_VERT
-    items:
-      type: string
-    title: Key Prefixes
-    type: array
-  local_bind_volumes:
-    description: Here you can define Feature specific, arbitrary, absolute bind volume
-      mappings.
-    items:
-      type: string
-    title: Local Bind Volumes
-    type: array
-  local_environment_variables:
-    additionalProperties:
-      type: string
-    description: Here you can define Feature specific, arbitrary environment variables.
-    title: Local Environment Variables
-    type: object
-  repository_branch:
-    $ref: '#/$defs/Branches'
-    default: main
-    examples:
-    - main
-  repository_subdir:
-    default: VERT
-    title: Repository Subdir
-    type: string
-  repository_url:
-    default: https://github.com/VERT-sh/VERT.git
-    format: uri
-    maxLength: 2083
-    minLength: 1
-    title: Repository Url
-    type: string
-  vert_port_container:
-    default: 80
-    description: The VERT container port.
-    exclusiveMinimum: 0
-    title: Vert Port Container
-    type: integer
-  vert_port_host:
-    default: 4546
-    description: The VERT host port.
-    exclusiveMinimum: 0
-    title: Vert Port Host
-    type: integer
-title: Config
-type: object
+  description: Here you can define Feature specific, arbitrary environment variables.
+  title: Local Environment Variables
+  type: object
+repository_branch:
+  $ref: '#/$defs/Branches'
+  default: main
+  examples:
+  - main
+repository_subdir:
+  default: VERT
+  title: Repository Subdir
+  type: string
+repository_url:
+  default: https://github.com/VERT-sh/VERT.git
+  format: uri
+  maxLength: 2083
+  minLength: 1
+  title: Repository Url
+  type: string
+vert_port_container:
+  default: 80
+  description: The VERT container port.
+  exclusiveMinimum: 0
+  title: Vert Port Container
+  type: integer
+vert_port_host:
+  default: 4546
+  description: The VERT host port.
+  exclusiveMinimum: 0
+  title: Vert Port Host
+  type: integer
 
 ```
 
@@ -241,4 +232,4 @@ To follow up on the previous LinkedIn publications, visit:
 
 ***
 
-Last changed: **2026-05-09 11:28:24 UTC**
+Last changed: **2026-05-12 10:05:44 UTC**
