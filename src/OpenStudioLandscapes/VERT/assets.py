@@ -34,7 +34,7 @@ from OpenStudioLandscapes.engine.common_assets import (
     group_in,
     group_out,
 )
-from OpenStudioLandscapes.engine.config.models import ConfigEngine
+from OpenStudioLandscapes.engine.env.configurable_resources.config_engine import ConfigEngineConfigurableResource
 from OpenStudioLandscapes.engine.constants import (
     ASSET_HEADER_BASE,
     ConfigParent,
@@ -216,6 +216,7 @@ def clone_repository(
 )
 def compose(
     context: AssetExecutionContext,
+    config_ConfigEngineConfigurableResource: ConfigEngineConfigurableResource,
     compose_networks: Dict,  # pylint: disable=redefined-outer-name
     clone_repository: pathlib.Path,  # pylint: disable=redefined-outer-name
     CONFIG: config.models.Config,  # pylint: disable=redefined-outer-name
@@ -242,8 +243,6 @@ def compose(
     """
 
     env: Dict = CONFIG.env
-
-    config_engine: ConfigEngine = CONFIG.config_engine
 
     docker_compose_override: pathlib.Path = CONFIG.docker_compose_override_expanded
     context.log.debug(f"{docker_compose_override = }")
@@ -304,7 +303,7 @@ def compose(
             {
                 # "/etc/localtime:/etc/localtime:ro",
                 # *_volume_relative,
-                *config_engine.global_bind_volumes,
+                *config_ConfigEngineConfigurableResource.global_bind_volumes,
                 *CONFIG.local_bind_volumes,
             }
         )
@@ -315,7 +314,7 @@ def compose(
         context=context,
         service_name=service_name,
         landscape_id=env.get("LANDSCAPE", "default"),
-        domain_lan=config_engine.openstudiolandscapes__domain_lan,
+        domain_lan=config_ConfigEngineConfigurableResource.openstudiolandscapes__domain_lan,
     )
     # container_name = "--".join([f"{service_name}", env.get("LANDSCAPE", "default")])
     # host_name = ".".join([env["HOSTNAME"], env["OPENSTUDIOLANDSCAPES__DOMAIN_LAN"]])
@@ -325,10 +324,10 @@ def compose(
             service_name: {
                 "container_name": container_name,
                 "hostname": host_name,
-                "domainname": config_engine.openstudiolandscapes__domain_lan,
+                "domainname": config_ConfigEngineConfigurableResource.openstudiolandscapes__domain_lan,
                 "environment": {
-                    "TZ": config_engine.tz,
-                    **config_engine.global_environment_variables,
+                    "TZ": config_ConfigEngineConfigurableResource.tz,
+                    **config_ConfigEngineConfigurableResource.global_environment_variables,
                     **CONFIG.local_environment_variables,
                 },
                 **copy.deepcopy(ports_dict),
