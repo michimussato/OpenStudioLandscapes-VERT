@@ -9,7 +9,7 @@ from pydantic import (
     PositiveInt,
 )
 
-from OpenStudioLandscapes.VERT import (
+from OpenStudioLandscapes.VERT.constants import (
     ASSET_HEADER,
     LOGGER,
     dist,
