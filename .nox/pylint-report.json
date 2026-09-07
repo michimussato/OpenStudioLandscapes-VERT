@@ -45,7 +45,7 @@
         "line": 124,
         "column": 4,
         "endLine": 124,
-        "endColumn": 32,
+        "endColumn": 25,
         "path": "src/OpenStudioLandscapes/VERT/assets.py",
         "symbol": "redefined-outer-name",
         "message": "Redefining name 'CONFIG' from outer scope (line 70)",
@@ -143,6 +143,45 @@
         "message-id": "W1203"
     },
     {
+        "type": "warning",
+        "module": "OpenStudioLandscapes.VERT.constants",
+        "obj": "",
+        "line": 14,
+        "column": 5,
+        "endLine": null,
+        "endColumn": null,
+        "path": "src/OpenStudioLandscapes/VERT/constants.py",
+        "symbol": "fixme",
+        "message": "TODO: Import directly (no need for conditional) when `python_requires = >= 3.8`",
+        "message-id": "W0511"
+    },
+    {
+        "type": "convention",
+        "module": "OpenStudioLandscapes.VERT.constants",
+        "obj": "",
+        "line": 1,
+        "column": 0,
+        "endLine": null,
+        "endColumn": null,
+        "path": "src/OpenStudioLandscapes/VERT/constants.py",
+        "symbol": "missing-module-docstring",
+        "message": "Missing module docstring",
+        "message-id": "C0114"
+    },
+    {
+        "type": "convention",
+        "module": "OpenStudioLandscapes.VERT.constants",
+        "obj": "",
+        "line": 38,
+        "column": 4,
+        "endLine": 38,
+        "endColumn": 8,
+        "path": "src/OpenStudioLandscapes/VERT/constants.py",
+        "symbol": "invalid-name",
+        "message": "Constant name \"fill\" doesn't conform to UPPER_CASE naming style",
+        "message-id": "C0103"
+    },
+    {
         "type": "convention",
         "module": "OpenStudioLandscapes.VERT._definitions_with_upstream_specs",
         "obj": "",
@@ -151,32 +190,6 @@
         "endLine": null,
         "endColumn": null,
         "path": "src/OpenStudioLandscapes/VERT/_definitions_with_upstream_specs.py",
-        "symbol": "missing-module-docstring",
-        "message": "Missing module docstring",
-        "message-id": "C0114"
-    },
-    {
-        "type": "warning",
-        "module": "OpenStudioLandscapes.VERT.__init__",
-        "obj": "",
-        "line": 15,
-        "column": 5,
-        "endLine": null,
-        "endColumn": null,
-        "path": "src/OpenStudioLandscapes/VERT/__init__.py",
-        "symbol": "fixme",
-        "message": "TODO: Import directly (no need for conditional) when `python_requires = >= 3.8`",
-        "message-id": "W0511"
-    },
-    {
-        "type": "convention",
-        "module": "OpenStudioLandscapes.VERT",
-        "obj": "",
-        "line": 1,
-        "column": 0,
-        "endLine": null,
-        "endColumn": null,
-        "path": "src/OpenStudioLandscapes/VERT/__init__.py",
         "symbol": "missing-module-docstring",
         "message": "Missing module docstring",
         "message-id": "C0114"
@@ -192,19 +205,6 @@
         "path": "src/OpenStudioLandscapes/VERT/__init__.py",
         "symbol": "invalid-name",
         "message": "Module name \"VERT\" doesn't conform to snake_case naming style",
-        "message-id": "C0103"
-    },
-    {
-        "type": "convention",
-        "module": "OpenStudioLandscapes.VERT",
-        "obj": "",
-        "line": 39,
-        "column": 4,
-        "endLine": 39,
-        "endColumn": 8,
-        "path": "src/OpenStudioLandscapes/VERT/__init__.py",
-        "symbol": "invalid-name",
-        "message": "Constant name \"fill\" doesn't conform to UPPER_CASE naming style",
         "message-id": "C0103"
     },
     {
